@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleLocalSettings">
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$/../ism" value="1385763410000" />
+        <entry key="$PROJECT_DIR$/../scalatest" value="1391641933000" />
+        <entry key="$PROJECT_DIR$/../simpleakka" value="1384204555000" />
+        <entry key="$PROJECT_DIR$/../vaadin-bug" value="1385755233000" />
+        <entry key="$PROJECT_DIR$/../vaadin-bug2" value="1385851793000" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/classes" />
+  </component>
+</project>
+
