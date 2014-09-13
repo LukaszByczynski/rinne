@@ -1,4 +1,5 @@
 project/project
+project/target
 .idea/workspace.xml
 .idea/rebel_project.xml
 target/

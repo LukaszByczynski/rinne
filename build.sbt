@@ -1,10 +1,12 @@
-name := "rinne-root"
-
 organization in ThisBuild := "org.vaadin.addons"
 
-version in ThisBuild := "0.1.0"
+version in ThisBuild := "0.1.1"
 
 scalaVersion in ThisBuild := "2.11.2"
+
+crossScalaVersions in ThisBuild := Seq("2.10.4", "2.11.2")
+
+name := "rinne-root"
 
 lazy val addon = project in file("addon")
 
