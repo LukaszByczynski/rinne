@@ -1,20 +1,19 @@
-package org.vaadin.addons.rinne.event
+package org.vaadin.addons.rinne.events
 
 import com.vaadin.data.Property
-import com.vaadin.ui.AbstractField
+import com.vaadin.data.util.AbstractProperty
 
-
-trait FieldReadOnlyStatusChangeNotifier[T]
-  extends AbstractField[T] with Property.ReadOnlyStatusChangeNotifier {
+trait ReadOnlyStatusChangeNotifier[T] extends AbstractProperty[T]
+with Property.ReadOnlyStatusChangeNotifier with Property.ReadOnlyStatusChangeEvent {
 
   lazy val readOnlyStatusChangeListeners = new ListenersTrait[Property.ReadOnlyStatusChangeEvent, ReadOnlyStatusChangeListener] {
     override def listeners = getListeners(classOf[Property.ReadOnlyStatusChangeEvent])
 
-    override def addListener(elem: Property.ReadOnlyStatusChangeEvent => Unit): Unit = {
+    override def addListener(elem: Property.ReadOnlyStatusChangeEvent => Unit) = {
       addReadOnlyStatusChangeListener(new ReadOnlyStatusChangeListener(elem))
     }
 
-    override def removeListener(elem: ReadOnlyStatusChangeListener): Unit = {
+    override def removeListener(elem: ReadOnlyStatusChangeListener) = {
       removeReadOnlyStatusChangeListener(elem)
     }
   }

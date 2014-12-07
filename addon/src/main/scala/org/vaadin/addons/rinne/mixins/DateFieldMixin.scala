@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.event.{FocusNotifier, BlurNotifier}
+import org.vaadin.addons.rinne.events.{FocusNotifier, BlurNotifier}
 import com.vaadin.shared.ui.datefield.Resolution
 import com.vaadin.ui.DateField
 import java.util.{TimeZone, Date}

@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.event.ValueChangeNotifier
+import org.vaadin.addons.rinne.events.ValueChangeNotifier
 import com.vaadin.ui.AbstractField
 
 trait AbstractFieldMixin[T] extends AbstractField[T]

@@ -1,4 +1,4 @@
-package org.vaadin.addons.rinne.event
+package org.vaadin.addons.rinne.events
 
 import com.vaadin.event.LayoutEvents
 import com.vaadin.event.LayoutEvents.LayoutClickEvent

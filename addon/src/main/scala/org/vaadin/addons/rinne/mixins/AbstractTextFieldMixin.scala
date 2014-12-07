@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.event.{BlurNotifier, FocusNotifier}
+import org.vaadin.addons.rinne.events.{BlurNotifier, FocusNotifier}
 import com.vaadin.ui.AbstractTextField
 
 trait AbstractTextFieldMixin extends AbstractTextField

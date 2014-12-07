@@ -1,7 +1,7 @@
 package org.vaadin.addons.rinne.mixins
 
 import org.vaadin.addons.rinne.SelectionMode
-import org.vaadin.addons.rinne.event._
+import org.vaadin.addons.rinne.events._
 import com.vaadin.server.Resource
 import com.vaadin.shared.ui.MultiSelectMode
 import com.vaadin.ui.Table

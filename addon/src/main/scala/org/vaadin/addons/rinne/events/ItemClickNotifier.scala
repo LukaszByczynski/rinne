@@ -1,4 +1,4 @@
-package org.vaadin.addons.rinne.event
+package org.vaadin.addons.rinne.events
 
 import com.vaadin.event.ItemClickEvent
 import com.vaadin.ui.AbstractComponent

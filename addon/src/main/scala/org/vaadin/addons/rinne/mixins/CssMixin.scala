@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.event.LayoutClickNotifierMixin
+import org.vaadin.addons.rinne.events.LayoutClickNotifierMixin
 import com.vaadin.ui.CssLayout
 
 trait CssMixin extends CssLayout with AbstractLayoutMixin with LayoutClickNotifierMixin {

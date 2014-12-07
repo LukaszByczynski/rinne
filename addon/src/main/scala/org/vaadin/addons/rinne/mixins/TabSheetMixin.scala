@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.event._
+import org.vaadin.addons.rinne.events._
 import com.vaadin.ui.Component.Focusable
 import com.vaadin.ui.{Component, TabSheet}
 

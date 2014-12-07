@@ -7,7 +7,7 @@ import com.vaadin.event.LayoutEvents.LayoutClickEvent
 import com.vaadin.ui._
 import scala.collection.mutable
 
-package object event {
+package object events {
 
   trait ListenersSet[E] extends mutable.Set[E] {
     def +=(elem: => Unit): this.type
