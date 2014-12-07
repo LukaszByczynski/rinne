@@ -1,6 +1,6 @@
 organization in ThisBuild := "org.vaadin.addons"
 
-version in ThisBuild := "0.1.1"
+version in ThisBuild := "0.2.0-SNAPSHOT"
 
 scalaVersion in ThisBuild := "2.11.4"
 
