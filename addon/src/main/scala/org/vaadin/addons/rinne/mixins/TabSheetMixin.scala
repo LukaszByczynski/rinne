@@ -1,8 +1,8 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.events._
 import com.vaadin.ui.Component.Focusable
 import com.vaadin.ui.{Component, TabSheet}
+import org.vaadin.addons.rinne.events._
 
 trait TabSheetMixin extends TabSheet with AbstractComponentMixin with Focusable with FocusNotifier with BlurNotifier {
 

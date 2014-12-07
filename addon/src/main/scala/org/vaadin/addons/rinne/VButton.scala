@@ -1,12 +1,12 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
-import org.vaadin.addons.rinne.KeyShortcut
-import org.vaadin.addons.rinne.events._
 import com.vaadin.ui.Button
+import org.vaadin.addons.rinne.events._
+import org.vaadin.addons.rinne.mixins.{AbstractComponentMixin, FocusableMixin}
 
 import scala.collection.JavaConverters._
 
-trait ButtonMixin extends Button with AbstractComponentMixin with BlurNotifier with FocusNotifier with FocusableMixin {
+class VButton extends Button with AbstractComponentMixin with BlurNotifier with FocusNotifier with FocusableMixin {
 
   private var _clickKeyShortcut: Option[KeyShortcut] = None
 

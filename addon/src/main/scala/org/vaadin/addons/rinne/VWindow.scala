@@ -1,10 +1,10 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
-import org.vaadin.addons.rinne.KeyShortcut
-import org.vaadin.addons.rinne.events._
 import com.vaadin.ui.Window
+import org.vaadin.addons.rinne.events._
+import org.vaadin.addons.rinne.mixins.PanelMixin
 
-trait WindowMixin extends Window with PanelMixin with BlurNotifier with FocusNotifier {
+class VWindow extends Window with PanelMixin with BlurNotifier with FocusNotifier {
 
   private var _closeKeyShortcut: Option[KeyShortcut] = None
 

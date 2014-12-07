@@ -1,10 +1,10 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
-import org.vaadin.addons.rinne.KeyShortcut
+import com.vaadin.ui.{Button, NativeButton}
 import org.vaadin.addons.rinne.events._
-import com.vaadin.ui.{NativeButton, Button}
+import org.vaadin.addons.rinne.mixins.{AbstractComponentMixin, FocusableMixin}
 
-trait NativeButtonMixin extends NativeButton with AbstractComponentMixin with BlurNotifier with FocusNotifier with FocusableMixin {
+class VNativeButton extends NativeButton with AbstractComponentMixin with BlurNotifier with FocusNotifier with FocusableMixin {
 
   private var _clickKeyShortcut: Option[KeyShortcut] = None
 

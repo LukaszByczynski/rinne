@@ -7,12 +7,8 @@
         <option name="jdk" value="1.7" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/addon" />
-            <option value="$PROJECT_DIR$/addon/project" />
-            <option value="$PROJECT_DIR$/demo" />
-            <option value="$PROJECT_DIR$/demo/project" />
-            <option value="$PROJECT_DIR$/project" />
+            <option value="$PROJECT_DIR$/addon/project/project/project/project/project/project" />
+            <option value="$PROJECT_DIR$/addon/project/project/project/project/project/project/project" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />

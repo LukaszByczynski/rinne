@@ -1,14 +1,15 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
-import org.vaadin.addons.rinne.SelectionMode
-import org.vaadin.addons.rinne.events._
 import com.vaadin.server.Resource
 import com.vaadin.shared.ui.MultiSelectMode
 import com.vaadin.ui.Table
+import org.vaadin.addons.rinne.events._
+import org.vaadin.addons.rinne.mixins.AbstractSelectMixin
+
 import scala.collection.mutable
 
 
-trait TableMixin extends Table with AbstractSelectMixin with ItemClickNotifier {
+class VTable extends Table with AbstractSelectMixin with ItemClickNotifier {
 
   private val _columnGeneratorIds: mutable.Set[Any] = mutable.Set.empty[Any]
 

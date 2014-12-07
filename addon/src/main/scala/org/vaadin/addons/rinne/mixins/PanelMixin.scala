@@ -6,10 +6,14 @@ trait PanelMixin extends Panel with AbstractSingleComponentContainerMixin with F
 
   def scrollLeft: Int = getScrollLeft
 
-  def scrollLeft_=(scrollLeft: Int) { setScrollLeft(scrollLeft) }
+  def scrollLeft_=(scrollLeft: Int) {
+    setScrollLeft(scrollLeft)
+  }
 
   def scrollTop: Int = getScrollTop
 
-  def scrollTop_=(scrollTop: Int) { setScrollTop(scrollTop) }
+  def scrollTop_=(scrollTop: Int) {
+    setScrollTop(scrollTop)
+  }
 
 }

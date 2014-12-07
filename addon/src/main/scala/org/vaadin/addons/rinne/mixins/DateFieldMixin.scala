@@ -1,9 +1,10 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.events.{FocusNotifier, BlurNotifier}
+import java.util.{TimeZone, Date}
+
 import com.vaadin.shared.ui.datefield.Resolution
 import com.vaadin.ui.DateField
-import java.util.{TimeZone, Date}
+import org.vaadin.addons.rinne.events.{FocusNotifier, BlurNotifier}
 
 trait DateFieldMixin extends DateField with AbstractFieldMixin[Date] with BlurNotifier with FocusNotifier {
 

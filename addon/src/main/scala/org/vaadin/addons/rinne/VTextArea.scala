@@ -1,8 +1,9 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
 import com.vaadin.ui.TextArea
+import org.vaadin.addons.rinne.mixins.AbstractTextFieldMixin
 
-trait TextAreaMixin extends TextArea with AbstractTextFieldMixin {
+class VTextArea extends TextArea with AbstractTextFieldMixin {
   def rows: Int = getRows
 
   def rows_=(rows: Int) {

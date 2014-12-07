@@ -1,8 +1,9 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
 import com.vaadin.ui.RichTextArea
+import org.vaadin.addons.rinne.mixins.AbstractFieldMixin
 
-trait RichTextAreaMixin extends RichTextArea with AbstractFieldMixin[String] {
+class VRichTextArea extends RichTextArea with AbstractFieldMixin[String] {
 
   nullRepresentation = ""
 

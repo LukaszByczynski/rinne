@@ -1,11 +1,10 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
-import org.vaadin.addons.rinne.converters.Converters
 import com.vaadin.shared.ui.combobox.FilteringMode
+import com.vaadin.ui.ComboBox
+import org.vaadin.addons.rinne.mixins.{ContainerMixin, ComponentMixin, AbstractSelectMixin}
 
-trait ComboBoxMixin extends com.vaadin.ui.ComboBox with AbstractSelectMixin with ContainerMixin with SizeableMixin {
-
-  setConverter(Converters.optionToAny)
+class VComboBox extends ComboBox with AbstractSelectMixin with ContainerMixin {
 
   def inputPrompt: Option[String] = Option(getInputPrompt)
 

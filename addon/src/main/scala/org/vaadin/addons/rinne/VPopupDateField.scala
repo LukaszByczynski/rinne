@@ -1,9 +1,9 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
-import org.vaadin.addons.rinne.converters.Converters
 import com.vaadin.ui.PopupDateField
+import org.vaadin.addons.rinne.mixins.DateFieldMixin
 
-trait PopupDateFieldMixin extends PopupDateField with DateFieldMixin {
+class VPopupDateField extends PopupDateField with DateFieldMixin {
 
   def prompt: Option[String] = Option(getInputPrompt)
 

@@ -1,10 +1,11 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne
 
 import com.vaadin.data.util.converter.Converter
 import com.vaadin.shared.ui.label.ContentMode
 import com.vaadin.ui.Label
+import org.vaadin.addons.rinne.mixins.{AbstractComponentMixin, PropertyMixin}
 
-trait LabelMixin extends Label with AbstractComponentMixin with PropertyMixin[String] {
+class VLabel extends Label with AbstractComponentMixin with PropertyMixin[String] {
 
   def contentMode: ContentMode = getContentMode
 
