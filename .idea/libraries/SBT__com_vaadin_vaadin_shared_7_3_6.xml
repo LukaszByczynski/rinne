@@ -4,8 +4,6 @@
       <root url="jar://$USER_HOME$/.ivy2/cache/com.vaadin/vaadin-shared/jars/vaadin-shared-7.3.6.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.ivy2/cache/com.vaadin/vaadin-shared/jars/vaadin-shared-7.3.6.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>
