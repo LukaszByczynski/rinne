@@ -6,9 +6,23 @@ import org.vaadin.addons.rinne.mixins.PanelMixin
 
 class VWindow extends Window with PanelMixin with BlurNotifier with FocusNotifier {
 
-  private var _closeKeyShortcut: Option[KeyShortcut] = None
+  lazy val closeListeners: ListenersSet[Window.CloseEvent => Unit] =
+    new ListenersTrait[Window.CloseEvent, WindowCloseListener] {
+      override def listeners = getListeners(classOf[com.vaadin.ui.Window.CloseListener])
 
-  def closeKeyShortcut: Option[KeyShortcut] = _closeKeyShortcut
+      override def addListener(elem: Window.CloseEvent => Unit) = addCloseListener(new WindowCloseListener(elem))
+
+      override def removeListener(elem: WindowCloseListener) = removeCloseListener(elem)
+    }
+  lazy val resizeListeners: ListenersSet[Window.ResizeEvent => Unit] =
+    new ListenersTrait[Window.ResizeEvent, WindowResizeListener] {
+      override def listeners = getListeners(classOf[com.vaadin.ui.Window.CloseListener])
+
+      override def addListener(elem: Window.ResizeEvent => Unit) = addResizeListener(new WindowResizeListener(elem))
+
+      override def removeListener(elem: WindowResizeListener) = removeResizeListener(elem)
+    }
+  private var _closeKeyShortcut: Option[KeyShortcut] = None
 
   def closeKeyShortcut_=(cs: Option[KeyShortcut]): Unit = {
     _closeKeyShortcut = cs
@@ -19,47 +33,35 @@ class VWindow extends Window with PanelMixin with BlurNotifier with FocusNotifie
     }
   }
 
-  def closeKeyShortcut_=(cs: KeyShortcut): Unit = this.closeKeyShortcut = Option(cs)
+  def closeKeyShortcut: Option[KeyShortcut] = _closeKeyShortcut
 
-  def positionX_=(positionX: Int): Unit = setPositionX(positionX)
+  def closeKeyShortcut_=(cs: KeyShortcut): Unit = this.closeKeyShortcut = Option(cs)
 
   def positionX: Int = getPositionX
 
-  def positionY_=(positionY: Int): Unit = setPositionY(positionY)
+  def positionX_=(positionX: Int): Unit = setPositionX(positionX)
 
   def positionY: Int = getPositionY
 
-  def resizable_=(resizable: Boolean): Unit = setResizable(resizable)
+  def positionY_=(positionY: Int): Unit = setPositionY(positionY)
 
   def resizable: Boolean = isResizable
 
-  def modal_=(modal: Boolean): Unit = setModal(modal)
+  def resizable_=(resizable: Boolean): Unit = setResizable(resizable)
 
   def modal: Boolean = isModal
 
-  def closable_=(closable: Boolean): Unit = setClosable(closable)
+  def modal_=(modal: Boolean): Unit = setModal(modal)
 
   def closable: Boolean = isClosable
 
-  def draggable_=(draggable: Boolean) = setDraggable(draggable)
+  def closable_=(closable: Boolean): Unit = setClosable(closable)
 
   def draggable: Boolean = isDraggable
 
-  lazy val closeListeners: ListenersSet[Window.CloseEvent => Unit] =
-    new ListenersTrait[Window.CloseEvent, WindowCloseListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Window.CloseListener])
+  def draggable_=(draggable: Boolean) = setDraggable(draggable)
 
-      override def addListener(elem: Window.CloseEvent => Unit) = addCloseListener(new WindowCloseListener(elem))
 
-      override def removeListener(elem: WindowCloseListener) = removeCloseListener(elem)
-    }
 
-  lazy val resizeListeners: ListenersSet[Window.ResizeEvent => Unit] =
-    new ListenersTrait[Window.ResizeEvent, WindowResizeListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Window.CloseListener])
 
-      override def addListener(elem: Window.ResizeEvent => Unit) = addResizeListener(new WindowResizeListener(elem))
-
-      override def removeListener(elem: WindowResizeListener) = removeResizeListener(elem)
-    }
 }

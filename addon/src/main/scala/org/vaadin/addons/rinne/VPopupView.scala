@@ -18,11 +18,11 @@ class VPopupView extends PopupView("", null) with AbstractComponentMixin with Ha
     )
   }
 
-  def popupContent: Option[Component] = Option(getContent.getPopupComponent)
-
   def popupContent_=(popupContent: Component) {
     this.popupContent = () => popupContent
   }
+
+  def popupContent: Option[Component] = Option(getContent.getPopupComponent)
 
   def popupContent_=(popupContent: () => Component) {
     val html = getContent.getMinimizedValueAsHTML

@@ -6,7 +6,19 @@ import org.vaadin.addons.rinne.mixins.{AbstractComponentMixin, FocusableMixin}
 
 class VNativeButton extends NativeButton with AbstractComponentMixin with BlurNotifier with FocusNotifier with FocusableMixin {
 
+  lazy val clickListeners: ListenersSet[Button.ClickEvent => Unit] =
+    new ListenersTrait[Button.ClickEvent, ButtonClickListener] {
+      override def listeners = getListeners(classOf[Button.ClickEvent])
+
+      override def addListener(elem: Button.ClickEvent => Unit) = addClickListener(new ButtonClickListener(elem))
+
+      override def removeListener(elem: ButtonClickListener) = removeClickListener(elem)
+    }
   private var _clickKeyShortcut: Option[KeyShortcut] = None
+
+  def clickShortcut_=(clickShortcut: KeyShortcut) {
+    this.clickKeyShortcut = Option(clickShortcut)
+  }
 
   def clickKeyShortcut: Option[KeyShortcut] = _clickKeyShortcut
 
@@ -18,22 +30,15 @@ class VNativeButton extends NativeButton with AbstractComponentMixin with BlurNo
     }
   }
 
-  def clickShortcut_=(clickShortcut: KeyShortcut) { this.clickKeyShortcut = Option(clickShortcut) }
-
   def disableOnClick: Boolean = isDisableOnClick
 
-  def disableOnClick_=(disableOnClick: Boolean) { setDisableOnClick(disableOnClick) }
+  def disableOnClick_=(disableOnClick: Boolean) {
+    setDisableOnClick(disableOnClick)
+  }
 
   def htmlContentAllowed: Boolean = isHtmlContentAllowed
 
-  def htmlContentAllowed_=(htmlContentAllowed: Boolean) { setHtmlContentAllowed(htmlContentAllowed) }
-
-  lazy val clickListeners: ListenersSet[Button.ClickEvent => Unit] =
-    new ListenersTrait[Button.ClickEvent, ButtonClickListener] {
-      override def listeners = getListeners(classOf[Button.ClickEvent])
-
-      override def addListener(elem: Button.ClickEvent => Unit) = addClickListener(new ButtonClickListener(elem))
-
-      override def removeListener(elem: ButtonClickListener) = removeClickListener(elem)
-    }
+  def htmlContentAllowed_=(htmlContentAllowed: Boolean) {
+    setHtmlContentAllowed(htmlContentAllowed)
+  }
 }

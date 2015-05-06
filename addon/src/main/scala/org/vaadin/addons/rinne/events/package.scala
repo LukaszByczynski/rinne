@@ -5,6 +5,7 @@ import com.vaadin.data.Property.ReadOnlyStatusChangeEvent
 import com.vaadin.event.ItemClickEvent
 import com.vaadin.event.LayoutEvents.LayoutClickEvent
 import com.vaadin.ui._
+
 import scala.collection.mutable
 
 package object events {
@@ -31,11 +32,13 @@ package object events {
     }
 
     def +=(elem: => Unit) = {
-      addListener((e: E) => elem); this
+      addListener((e: E) => elem);
+      this
     }
 
     def +=(elem: E => Unit) = {
-      addListener(elem); this
+      addListener(elem);
+      this
     }
 
     def -=(elem: E => Unit) = {

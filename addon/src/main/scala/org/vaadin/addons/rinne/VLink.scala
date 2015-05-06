@@ -8,12 +8,12 @@ import org.vaadin.addons.rinne.mixins.AbstractComponentMixin
 class VLink extends Link with AbstractComponentMixin {
   def targetName: Option[String] = Option(getTargetName)
 
-  def targetName_=(targetName: Option[String]):Unit =  {
-    setTargetName(caption.orNull)
-  }
-
   def targetName_=(targetName: String) {
     setTargetName(targetName)
+  }
+
+  def targetName_=(targetName: Option[String]): Unit = {
+    setTargetName(caption.orNull)
   }
 
   def targetBorder: BorderStyle = getTargetBorder
@@ -34,11 +34,11 @@ class VLink extends Link with AbstractComponentMixin {
 
   def resource: Option[Resource] = Option(getResource)
 
-  def resource_=(resource: Option[Resource]): Unit = {
-    setResource(resource.orNull)
-  }
-
   def resource_=(resource: Resource): Unit = {
     setResource(resource)
+  }
+
+  def resource_=(resource: Option[Resource]): Unit = {
+    setResource(resource.orNull)
   }
 }

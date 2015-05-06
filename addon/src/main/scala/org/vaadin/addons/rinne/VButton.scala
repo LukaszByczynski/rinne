@@ -8,8 +8,6 @@ import scala.collection.JavaConverters._
 
 class VButton extends Button with AbstractComponentMixin with BlurNotifier with FocusNotifier with FocusableMixin {
 
-  private var _clickKeyShortcut: Option[KeyShortcut] = None
-
   lazy val clickListeners: ListenersSet[Button.ClickEvent => Unit] =
     new ListenersTrait[Button.ClickEvent, ButtonClickListener] {
       override def listeners = getListeners(classOf[Button.ClickEvent])
@@ -23,6 +21,7 @@ class VButton extends Button with AbstractComponentMixin with BlurNotifier with 
         listeners.asScala.foreach(_ => removeListener(_))
       }
     }
+  private var _clickKeyShortcut: Option[KeyShortcut] = None
 
   def clickKeyShortcut_=(clickShortcut: Option[KeyShortcut]) {
     _clickKeyShortcut = clickShortcut
@@ -34,17 +33,18 @@ class VButton extends Button with AbstractComponentMixin with BlurNotifier with 
 
   def disableOnClick: Boolean = isDisableOnClick
 
-  def clickKeyShortcut: Option[KeyShortcut] = _clickKeyShortcut
-
   def disableOnClick_=(disableOnClick: Boolean) {
     setDisableOnClick(disableOnClick)
   }
+
+  def clickKeyShortcut: Option[KeyShortcut] = _clickKeyShortcut
 
   def htmlContentAllowed: Boolean = isHtmlContentAllowed
 
   def htmlContentAllowed_=(htmlContentAllowed: Boolean) {
     setHtmlContentAllowed(htmlContentAllowed)
   }
+
 
   def clickKeyShortcut_=(clickShortcut: KeyShortcut) {
     this.clickKeyShortcut = Option(clickShortcut)
