@@ -1,10 +1,10 @@
 organization in ThisBuild := "org.vaadin.addons"
 
-version in ThisBuild := "0.2.0-SNAPSHOT"
+version in ThisBuild := "0.3.0-SNAPSHOT"
 
-scalaVersion in ThisBuild := "2.11.4"
+scalaVersion in ThisBuild := "2.11.6"
 
-crossScalaVersions in ThisBuild := Seq("2.10.4", "2.11.4")
+crossScalaVersions in ThisBuild := Seq("2.10.5", "2.11.6")
 
 name := "rinne-root"
 
