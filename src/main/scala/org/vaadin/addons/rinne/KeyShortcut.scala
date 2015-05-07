@@ -1,5 +1,34 @@
 package org.vaadin.addons.rinne
 
+import com.vaadin.server.Resource
+
+case class KeyShortcutAction(caption: Option[String], shorthandCaption: Option[String], icon: Option[Resource], key: KeyShortcut, action: (Any, Any) => Unit) {
+
+  def this(caption: String, key: KeyShortcut, action: => Unit) {
+    this(Some(caption), None, None, key, (_, _) => action)
+  }
+
+  def this(caption: String, key: KeyShortcut, action: (Any, Any) => Unit) {
+    this(Some(caption), None, None, key, action)
+  }
+
+  def this(shorthandCaption: String, action: => Unit, modifiers: KeyModifier*) {
+    this(None, Some(shorthandCaption), None, KeyShortcut(KeyCode.None, modifiers.toArray: _*), (_, _) => action)
+  }
+
+  def this(shorthandCaption: String, action: (Any, Any) => Unit, modifiers: KeyModifier*) {
+    this(None, Some(shorthandCaption), None, KeyShortcut(KeyCode.None, modifiers.toArray: _*), action)
+  }
+
+  def this(caption: String, icon: Resource, key: KeyShortcut, action: => Unit) {
+    this(Some(caption), None, Some(icon), key, (_, _) => action)
+  }
+
+  def this(caption: String, icon: Resource, key: KeyShortcut, action: (Any, Any) => Unit) {
+    this(Some(caption), None, Some(icon), key, action)
+  }
+}
+
 case class KeyShortcut(keyCode: KeyCode, modifiers: KeyModifier*)
 
 case class KeyCode(value: Int)
@@ -7,6 +36,8 @@ case class KeyCode(value: Int)
 case class KeyModifier(value: Int)
 
 object KeyCode {
+
+  val None = KeyCode(-1)
 
   val Enter = KeyCode(13)
 

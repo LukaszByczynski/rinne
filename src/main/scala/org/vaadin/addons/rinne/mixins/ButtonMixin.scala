@@ -21,6 +21,7 @@ trait ButtonMixin extends AbstractComponentMixin with BlurNotifierMixin with Foc
 
     override protected def listeners: util.Collection[_] = getListeners(classOf[Button.ClickEvent])
   }
+
   private var _clickKeyShortcut: Option[KeyShortcut] = None
 
   def clickKeyShortcut_=(clickShortcut: Option[KeyShortcut]): Unit = {
@@ -31,8 +32,6 @@ trait ButtonMixin extends AbstractComponentMixin with BlurNotifierMixin with Foc
     }
   }
 
-  def clickKeyShortcut: Option[KeyShortcut] = _clickKeyShortcut
-
   def disableOnClick: Boolean = isDisableOnClick
 
   def disableOnClick_=(disableOnClick: Boolean): Unit = {
@@ -41,14 +40,13 @@ trait ButtonMixin extends AbstractComponentMixin with BlurNotifierMixin with Foc
 
   def htmlContentAllowed: Boolean = isHtmlContentAllowed
 
-  def clickKeyShortcut_=(clickShortcut: KeyShortcut): Unit =
-  {
-    this.clickKeyShortcut = Option(clickShortcut)
-  }
-
   def htmlContentAllowed_=(htmlContentAllowed: Boolean): Unit = {
     setHtmlContentAllowed(htmlContentAllowed)
   }
 
+  def clickKeyShortcut: Option[KeyShortcut] = _clickKeyShortcut
 
+  def clickKeyShortcut_=(clickShortcut: KeyShortcut): Unit = {
+    clickKeyShortcut = Option(clickShortcut)
+  }
 }
