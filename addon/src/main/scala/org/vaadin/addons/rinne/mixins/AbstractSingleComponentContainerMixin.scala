@@ -2,7 +2,9 @@ package org.vaadin.addons.rinne.mixins
 
 import com.vaadin.ui.{Component, AbstractSingleComponentContainer}
 
-trait AbstractSingleComponentContainerMixin extends AbstractSingleComponentContainer {
+trait AbstractSingleComponentContainerMixin {
+  this: AbstractSingleComponentContainer =>
+
   def componentCount: Int = getComponentCount
 
   def content: Option[Component] = Option(getContent)

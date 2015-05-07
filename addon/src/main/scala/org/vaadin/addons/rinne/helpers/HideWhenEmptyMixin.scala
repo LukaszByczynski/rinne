@@ -1,19 +1,15 @@
-package org.vaadin.addons.rinne.mixins
+package org.vaadin.addons.rinne.helpers
 
 import com.vaadin.data.Property.{ReadOnlyStatusChangeEvent, ReadOnlyStatusChangeListener}
+import com.vaadin.ui.AbstractField
+import org.vaadin.addons.rinne.mixins.AbstractFieldMixin
 
 trait HideWhenEmptyMixin[T] extends AbstractFieldMixin[T] {
+  this: AbstractField[T] =>
 
-  valueChangeListeners += _visibilityTest()
+  readOnlyStatusChangeListeners += (_ => _visibilityTest())
+  valueChangeListeners += (_ => _visibilityTest())
   _visibilityTest()
-
-  addReadOnlyStatusChangeListener(
-    new ReadOnlyStatusChangeListener {
-      override def readOnlyStatusChange(event: ReadOnlyStatusChangeEvent) {
-        _visibilityTest()
-      }
-    }
-  )
 
   private def _visibilityTest() {
     if (!readOnly) {
@@ -25,9 +21,9 @@ trait HideWhenEmptyMixin[T] extends AbstractFieldMixin[T] {
         case v: String =>
           v.size > 0
         case v: Option[_] =>
-          v.isDefined && v.get.toString.size > 0
+          v.isDefined && v.get.toString.length > 0
         case _ =>
-          value.toString.size > 0
+          value.toString.length > 0
       }
     }
     else visible = false

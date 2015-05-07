@@ -1,24 +1,17 @@
 package org.vaadin.addons.rinne
 
 import com.vaadin.ui.Upload
+import com.vaadin.ui.Upload.Receiver
 import org.vaadin.addons.rinne.mixins.AbstractComponentMixin
 
 class VUpload extends Upload with AbstractComponentMixin {
-  //  def receiver: Option[Upload.ReceiveEvent => java.io.OutputStream] = getReceiver match {
-  //    case null => None
-  //    case receiver: UploadReceiver => Some(receiver.receiver)
-  //  }
-  //
-  //  def receiver_=(receiver: Upload.ReceiveEvent => java.io.OutputStream) {
-  //    setReceiver(new UploadReceiver(receiver))
-  //  }
-  //
-  //  def receiver_=(receiverOption: Option[Upload.ReceiveEvent => java.io.OutputStream]) {
-  //    receiverOption match {
-  //      case None => setReceiver(null)
-  //      case Some(r) => receiver = r
-  //    }
-  //  }
+
+
+  def receiver: Option[Receiver] = Option(getReceiver)
+
+  def receiver_=(receiver: Receiver): Unit = receiver_=(Option(receiver))
+
+  def receiver_=(receiverOption: Option[Receiver]): Unit = setReceiver(receiverOption.orNull)
 
   def uploading: Boolean = isUploading
 

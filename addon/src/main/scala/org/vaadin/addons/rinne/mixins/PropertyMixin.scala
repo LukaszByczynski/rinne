@@ -2,7 +2,8 @@ package org.vaadin.addons.rinne.mixins
 
 import com.vaadin.data.Property
 
-trait PropertyMixin[T] extends Property[T] {
+trait PropertyMixin[T] {
+  this: Property[T] =>
 
   def value: Option[T] = Option(getValue)
 

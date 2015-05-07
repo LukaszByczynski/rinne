@@ -2,15 +2,9 @@ package org.vaadin.addons.rinne
 
 import com.vaadin.shared.ui.MultiSelectMode
 import com.vaadin.ui.Tree
-import org.vaadin.addons.rinne.mixins.AbstractSelectMixin
+import org.vaadin.addons.rinne.mixins.{AbstractSelectMixin, ItemClickNotifierMixin}
 
-class VTree extends Tree with AbstractSelectMixin {
-
-  def multiSelect: Boolean = isMultiSelect
-
-  def multiSelect_=(multiSelect: Boolean) {
-    setMultiSelect(multiSelect)
-  }
+class VTree extends Tree with AbstractSelectMixin with ItemClickNotifierMixin {
 
   def expanded(itemId: Any): Boolean = isExpanded(itemId)
 

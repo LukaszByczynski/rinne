@@ -1,12 +1,11 @@
 package org.vaadin.addons.rinne
 
 import com.vaadin.ui.{Component, CssLayout}
-import org.vaadin.addons.rinne.events.LayoutClickNotifierMixin
-import org.vaadin.addons.rinne.mixins.AbstractLayoutMixin
+import org.vaadin.addons.rinne.mixins.{LayoutClickNotifierMixin, AbstractLayoutMixin}
 
 class VCssLayout extends CssLayout with AbstractLayoutMixin with LayoutClickNotifierMixin {
 
-  private var _cssMap = Map.empty[Component, String]
+  private var _cssMap = Map[Component, String]()
 
   def add[C <: Component](component: C, css: => String = null): C = {
     add(component)
@@ -16,7 +15,7 @@ class VCssLayout extends CssLayout with AbstractLayoutMixin with LayoutClickNoti
     component
   }
 
-  override def getCss(component: Component): String = _cssMap.getOrElse(component, "")
+  def getCssForComponent(component: Component): Option[String] = _cssMap.get(component)
 
   override def removeComponent(component: Component) = {
     super.removeComponent(component)

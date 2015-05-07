@@ -2,7 +2,8 @@ package org.vaadin.addons.rinne.mixins
 
 import com.vaadin.data.Container
 
-trait ContainerMixin extends Container with ComponentMixin {
+trait ContainerMixin {
+  this: Container =>
 
   import scala.collection.JavaConverters._
 

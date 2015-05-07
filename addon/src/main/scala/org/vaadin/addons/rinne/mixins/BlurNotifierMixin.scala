@@ -3,8 +3,9 @@ package org.vaadin.addons.rinne.mixins
 import java.util
 
 import com.vaadin.event.FieldEvents.{BlurEvent, BlurListener, BlurNotifier}
+import com.vaadin.server.AbstractClientConnector
 import com.vaadin.ui.AbstractComponent
-import org.vaadin.addons.rinne.events._
+import org.vaadin.addons.rinne.events.ListenersSet
 
 trait BlurNotifierMixin {
   this: AbstractComponent with BlurNotifier =>

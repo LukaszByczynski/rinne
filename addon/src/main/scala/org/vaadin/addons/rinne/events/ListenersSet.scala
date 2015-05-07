@@ -9,7 +9,7 @@ trait ListenersSet[E, L] extends mutable.Set[E => Unit] with Serializable {
 
   import scala.collection.JavaConverters._
 
-  abstract class Listener(val action: ListenerLambda) extends L
+  abstract class Listener(val action: ListenerLambda)
 
   protected def addListener(listener: ListenerLambda): Unit
 
@@ -23,21 +23,31 @@ trait ListenersSet[E, L] extends mutable.Set[E => Unit] with Serializable {
 
   override def iterator: Iterator[ListenerLambda] = {
     listeners.asScala.map {
-      case l: L with Listener => Some(l.action)
+      case l: Listener => Some(l.action)
       case _ => None
     }.flatten.toIterator
   }
 
-  override def +=(elem: ListenerLambda): ListenersSet[E, L] = {
+  override def +=(elem: ListenerLambda) = {
     addListener(elem)
     this
   }
 
-  override def -=(elem: E => Unit): ListenersSet[E, L] = {
+  def +=(elem: => Unit) = {
+    addListener(_ => elem)
+    this
+  }
+
+  override def -=(elem: E => Unit) = {
     listeners.asScala.foreach {
-      case e: L with Listener if e == elem => removeListener(e)
+      case e: Listener if e == elem => removeListener(e.asInstanceOf[L])
       case _ =>
     }
     this
+  }
+
+  override def clear(): Unit = {
+    super.clear()
+    listeners.asScala.foreach(_ => removeListener(_))
   }
 }

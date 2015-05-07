@@ -1,12 +1,27 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.events.{BlurNotifier, FocusNotifier}
-import com.vaadin.ui.AbstractTextField
+import java.util
 
-trait AbstractTextFieldMixin extends AbstractTextField
-with AbstractFieldMixin[String] with BlurNotifier with FocusNotifier {
+import com.vaadin.event.FieldEvents.{TextChangeListener, TextChangeEvent}
+import com.vaadin.ui.AbstractTextField
+import org.vaadin.addons.rinne.events.ListenersSet
+
+trait AbstractTextFieldMixin extends AbstractFieldMixin[String] with BlurNotifierMixin with FocusNotifierMixin {
+  this: AbstractTextField =>
 
   nullRepresentation = ""
+
+  lazy val textChangeListeners = new ListenersSet[TextChangeEvent, TextChangeListener] {
+    override protected def addListener(listener: ListenerLambda): Unit = addTextChangeListener(
+      new TextChangeListener {
+        override def textChange(event: TextChangeEvent): Unit = listener(event)
+      }
+    )
+
+    override protected def removeListener(listener: TextChangeListener): Unit = removeTextChangeListener(listener)
+
+    override protected def listeners: util.Collection[_] = getListeners(classOf[TextChangeEvent])
+  }
 
   def prompt: Option[String] = Option(getInputPrompt)
 
@@ -57,14 +72,4 @@ with AbstractFieldMixin[String] with BlurNotifier with FocusNotifier {
   def textChangeTimeout = getTextChangeTimeout
 
   def textChangeTimeout_=(textChangeTimeout: Int) = setTextChangeTimeout(textChangeTimeout)
-
-  //  lazy val textChangeListeners: ListenersSet[AbstractTextField.TextChangeEvent => Unit] =
-  //    new ListenersTrait[AbstractTextField.TextChangeEvent, TextChangeListener] {
-  //      override def listeners = p.getListeners(classOf[com.vaadin.event.FieldEvents.TextChangeEvent])
-  //
-  //      override def addListener(elem: AbstractTextField.TextChangeEvent => Unit) =
-  //        p.addTextChangeListener(new TextChangeListener(elem))
-  //
-  //      override def removeListener(elem: TextChangeListener) = p.removeTextChangeListener(elem)
-  //    }
 }

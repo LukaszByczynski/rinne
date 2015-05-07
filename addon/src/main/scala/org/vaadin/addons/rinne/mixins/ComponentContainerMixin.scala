@@ -1,20 +1,17 @@
 package org.vaadin.addons.rinne.mixins
 
-import com.vaadin.ui.{Component, ComponentContainer}
+import com.vaadin.ui.{AbstractComponentContainer, Component, ComponentContainer}
+
 import scala.collection.mutable
 
-trait ComponentContainerMixin extends ComponentContainer with ComponentMixin {
-
-  def add[C <: Component](component: C) = {
-    addComponent(component)
-    component
-  }
+trait ComponentContainerMixin extends ComponentMixin {
+  this: ComponentContainer =>
 
   lazy val componentSet = new mutable.Set[Component] with Serializable {
 
     import scala.collection.JavaConverters._
 
-    def contains(key: Component) = {
+    def contains(key: Component): Boolean = {
       iterator.contains(key)
     }
 
@@ -22,9 +19,20 @@ trait ComponentContainerMixin extends ComponentContainer with ComponentMixin {
       ComponentContainerMixin.this.iterator().asScala
     }
 
-    def +=(elem: Component) = { addComponent(elem); this }
+    def +=(elem: Component) = {
+      addComponent(elem)
+      this
+    }
 
-    def -=(elem: Component) = { removeComponent(elem); this }
+    def -=(elem: Component) = {
+      removeComponent(elem)
+      this
+    }
+  }
+
+  def add[C <: Component](component: C): C = {
+    addComponent(component)
+    component
   }
 
 }

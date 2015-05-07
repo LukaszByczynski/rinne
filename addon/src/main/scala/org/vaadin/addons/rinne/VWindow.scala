@@ -1,27 +1,36 @@
 package org.vaadin.addons.rinne
 
+import java.util
+
 import com.vaadin.ui.Window
-import org.vaadin.addons.rinne.events._
-import org.vaadin.addons.rinne.mixins.PanelMixin
+import com.vaadin.ui.Window.{CloseListener, ResizeListener, ResizeEvent, CloseEvent}
+import org.vaadin.addons.rinne.events.ListenersSet
+import org.vaadin.addons.rinne.mixins.{BlurNotifierMixin, FocusNotifierMixin, PanelMixin}
 
-class VWindow extends Window with PanelMixin with BlurNotifier with FocusNotifier {
+class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNotifierMixin {
 
-  lazy val closeListeners: ListenersSet[Window.CloseEvent => Unit] =
-    new ListenersTrait[Window.CloseEvent, WindowCloseListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Window.CloseListener])
+  lazy val closeListeners = new ListenersSet[CloseEvent, CloseListener] {
+    override protected def addListener(listener: ListenerLambda): Unit = addCloseListener(
+      new CloseListener {
+        override def windowClose(e: CloseEvent): Unit = listener(e)
+      }
+    )
 
-      override def addListener(elem: Window.CloseEvent => Unit) = addCloseListener(new WindowCloseListener(elem))
+    override protected def removeListener(listener: CloseListener): Unit = removeCloseListener(listener)
 
-      override def removeListener(elem: WindowCloseListener) = removeCloseListener(elem)
-    }
-  lazy val resizeListeners: ListenersSet[Window.ResizeEvent => Unit] =
-    new ListenersTrait[Window.ResizeEvent, WindowResizeListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Window.CloseListener])
+    override protected def listeners: util.Collection[_] = getListeners(classOf[CloseEvent])
+  }
+  lazy val resizeListeners = new ListenersSet[ResizeEvent, ResizeListener] {
+    override protected def addListener(listener: ListenerLambda): Unit = addResizeListener(
+      new ResizeListener {
+        override def windowResized(e: ResizeEvent): Unit = listener(e)
+      }
+    )
 
-      override def addListener(elem: Window.ResizeEvent => Unit) = addResizeListener(new WindowResizeListener(elem))
+    override protected def removeListener(listener: ResizeListener): Unit = removeResizeListener(listener)
 
-      override def removeListener(elem: WindowResizeListener) = removeResizeListener(elem)
-    }
+    override protected def listeners: util.Collection[_] = getListeners(classOf[ResizeEvent])
+  }
   private var _closeKeyShortcut: Option[KeyShortcut] = None
 
   def closeKeyShortcut_=(cs: Option[KeyShortcut]): Unit = {
@@ -60,8 +69,5 @@ class VWindow extends Window with PanelMixin with BlurNotifier with FocusNotifie
   def draggable: Boolean = isDraggable
 
   def draggable_=(draggable: Boolean) = setDraggable(draggable)
-
-
-
 
 }

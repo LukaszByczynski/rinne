@@ -2,7 +2,8 @@ package org.vaadin.addons.rinne.mixins
 
 import com.vaadin.ui.Layout.SpacingHandler
 
-trait SpacingHandlerMixin extends SpacingHandler {
+trait LayoutSpacingHandlerMixin {
+  this: SpacingHandler =>
 
   def spacing: Boolean = isSpacing
 

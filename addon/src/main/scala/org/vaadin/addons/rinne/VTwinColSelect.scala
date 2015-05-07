@@ -5,12 +5,6 @@ import org.vaadin.addons.rinne.mixins.AbstractSelectMixin
 
 class VTwinColSelect extends TwinColSelect with AbstractSelectMixin {
 
-  def multiSelect: Boolean = isMultiSelect
-
-  def multiSelect_=(multiSelect: Boolean) {
-    setMultiSelect(multiSelect)
-  }
-
   def rows: Int = getRows
 
   def rows_=(rows: Int) {

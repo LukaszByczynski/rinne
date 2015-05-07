@@ -1,9 +1,10 @@
 package org.vaadin.addons.rinne
 
 import com.vaadin.ui.{Alignment, Component, GridLayout}
-import org.vaadin.addons.rinne.mixins.{AbstractLayoutMixin, MarginHandlerMixin, SpacingHandlerMixin}
+import org.vaadin.addons.rinne.mixins._
 
-class VGridLayout extends GridLayout with AbstractLayoutMixin with SpacingHandlerMixin with MarginHandlerMixin {
+class VGridLayout extends GridLayout with AbstractLayoutMixin
+with LayoutSpacingHandlerMixin with LayoutMarginHandlerMixin with LayoutAlignmentHandlerMixin with LayoutClickNotifierMixin {
 
   def add[C <: Component](
     component: C = null,
@@ -30,26 +31,17 @@ class VGridLayout extends GridLayout with AbstractLayoutMixin with SpacingHandle
 
   def columns: Int = getColumns
 
-  def columns_=(columns: Int) {
-    setColumns(columns)
-  }
+  def columns_=(columns: Int): Unit = setColumns(columns)
 
   def rows: Int = getRows
 
-  def rows_=(rows: Int) {
-    setRows(rows)
-  }
+  def rows_=(rows: Int): Unit = setRows(rows)
 
   def cursorX: Int = getCursorX
 
-  def cursorX_=(cursorX: Int) {
-    setCursorX(cursorX)
-  }
+  def cursorX_=(cursorX: Int): Unit = setCursorX(cursorX)
 
   def cursorY: Int = getCursorY
 
-  def cursorY_=(cursorY: Int) {
-    setCursorY(cursorY)
-  }
-
+  def cursorY_=(cursorY: Int): Unit = setCursorY(cursorY)
 }

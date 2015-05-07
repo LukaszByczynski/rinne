@@ -3,14 +3,57 @@ package org.vaadin.addons.rinne.mixins
 import com.vaadin.server.Resource
 import com.vaadin.shared.ui.MultiSelectMode
 import com.vaadin.ui.Table
+import com.vaadin.ui.Table._
 import org.vaadin.addons.rinne.SelectionMode
 import org.vaadin.addons.rinne.events._
 
-import scala.collection.mutable
+trait TableMixin extends AbstractSelectMixin with ItemClickNotifierMixin {
+  this: Table =>
 
-trait TableMixin extends Table with AbstractSelectMixin with ItemClickNotifier {
+  lazy val headerClickListeners = new ListenersSet[HeaderClickEvent, HeaderClickListener] {
+    override def listeners = getListeners(classOf[HeaderClickEvent])
 
-  private val _columnGeneratorIds: mutable.Set[Any] = mutable.Set.empty[Any]
+    override protected def addListener(listener: ListenerLambda): Unit = addHeaderClickListener(
+      new HeaderClickListener {
+        override def headerClick(event: HeaderClickEvent): Unit = listener(event)
+      }
+    )
+
+    override protected def removeListener(listener: HeaderClickListener): Unit = removeHeaderClickListener(listener)
+  }
+  lazy val footerClickListeners = new ListenersSet[FooterClickEvent, FooterClickListener] {
+    override def listeners = getListeners(classOf[FooterClickEvent])
+
+    override protected def addListener(listener: ListenerLambda): Unit = addFooterClickListener(
+      new FooterClickListener {
+        override def footerClick(event: FooterClickEvent): Unit = listener(event)
+      }
+    )
+
+    override protected def removeListener(listener: FooterClickListener): Unit = removeFooterClickListener(listener)
+  }
+  lazy val columnResizeListeners = new ListenersSet[ColumnResizeEvent, ColumnResizeListener] {
+    override def listeners = getListeners(classOf[ColumnResizeEvent])
+
+    override protected def addListener(listener: ListenerLambda): Unit = addColumnResizeListener(
+      new ColumnResizeListener {
+        override def columnResize(event: ColumnResizeEvent): Unit = listener(event)
+      }
+    )
+
+    override protected def removeListener(listener: ColumnResizeListener): Unit = removeColumnResizeListener(listener)
+  }
+  lazy val columnReorderListeners = new ListenersSet[ColumnReorderEvent, ColumnReorderListener] {
+    override def listeners = getListeners(classOf[ColumnResizeEvent])
+
+    override protected def addListener(listener: ListenerLambda): Unit = addColumnReorderListener(
+      new ColumnReorderListener {
+        override def columnReorder(event: ColumnReorderEvent): Unit = listener(event)
+      }
+    )
+
+    override protected def removeListener(listener: ColumnReorderListener): Unit = removeColumnReorderListener(listener)
+  }
 
   def visibleColumns: Seq[Any] = getVisibleColumns
 
@@ -24,9 +67,10 @@ trait TableMixin extends Table with AbstractSelectMixin with ItemClickNotifier {
 
   def columnHeaders_=(columnHeaders: => Seq[String]): Unit = setColumnHeaders(columnHeaders: _*)
 
-  def columnHeaders_=(columnHeaders: Seq[Option[String]]): Unit = setColumnHeaders(columnHeaders map {
-    _.orNull
-  }: _*)
+  def columnHeaders_=(columnHeaders: Seq[Option[String]]): Unit =
+    setColumnHeaders(columnHeaders map {
+      _.orNull
+    }: _*)
 
   def columnIcons: Seq[Option[Resource]] = getColumnIcons.map(Option(_)).toSeq
 
@@ -152,56 +196,4 @@ trait TableMixin extends Table with AbstractSelectMixin with ItemClickNotifier {
   def footerVisible_=(footerVisible: Boolean) {
     setFooterVisible(footerVisible)
   }
-
-  lazy val headerClickListeners: ListenersSet[Table.HeaderClickEvent => Unit] =
-    new ListenersTrait[Table.HeaderClickEvent, HeaderClickListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Table.HeaderClickListener])
-
-      override def addListener(elem: Table.HeaderClickEvent => Unit) {
-        addHeaderClickListener(new HeaderClickListener(elem))
-      }
-
-      override def removeListener(elem: HeaderClickListener) {
-        removeHeaderClickListener(elem)
-      }
-    }
-
-  lazy val footerClickListeners: ListenersSet[Table.FooterClickEvent => Unit] =
-    new ListenersTrait[Table.FooterClickEvent, FooterClickListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Table.FooterClickListener])
-
-      override def addListener(elem: Table.FooterClickEvent => Unit) {
-        addFooterClickListener(new FooterClickListener(elem))
-      }
-
-      override def removeListener(elem: FooterClickListener) {
-        removeFooterClickListener(elem)
-      }
-    }
-
-  lazy val columnResizeListeners: ListenersSet[Table.ColumnResizeEvent => Unit] =
-    new ListenersTrait[Table.ColumnResizeEvent, ColumnResizeListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Table.ColumnReorderListener])
-
-      override def addListener(elem: Table.ColumnResizeEvent => Unit) {
-        addColumnResizeListener(new ColumnResizeListener(elem))
-      }
-
-      override def removeListener(elem: ColumnResizeListener) {
-        removeColumnResizeListener(elem)
-      }
-    }
-
-  lazy val columnReorderListeners: ListenersSet[Table.ColumnReorderEvent => Unit] =
-    new ListenersTrait[Table.ColumnReorderEvent, ColumnReorderListener] {
-      override def listeners = getListeners(classOf[com.vaadin.ui.Table.ColumnReorderListener])
-
-      override def addListener(elem: Table.ColumnReorderEvent => Unit) {
-        addColumnReorderListener(new ColumnReorderListener(elem))
-      }
-
-      override def removeListener(elem: ColumnReorderListener) {
-        removeColumnReorderListener(elem)
-      }
-    }
 }

@@ -1,11 +1,9 @@
 package org.vaadin.addons.rinne
 
 import com.vaadin.ui.OptionGroup
-import org.vaadin.addons.rinne.events.{BlurNotifier, FocusNotifier}
-import org.vaadin.addons.rinne.mixins.{AbstractSelectMixin, MultiSelectableMixin}
+import org.vaadin.addons.rinne.mixins.{FocusNotifierMixin, BlurNotifierMixin, AbstractSelectMixin}
 
-class VOptionGroup extends OptionGroup
-with AbstractSelectMixin with MultiSelectableMixin with BlurNotifier with FocusNotifier {
+class VOptionGroup extends OptionGroup with AbstractSelectMixin with BlurNotifierMixin with FocusNotifierMixin {
 
   def htmlContentAllowed: Boolean = isHtmlContentAllowed
 

@@ -1,10 +1,10 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.events.LayoutClickNotifierMixin
 import com.vaadin.ui.{Alignment, Component, AbstractOrderedLayout}
 
-trait AbstractOrderedLayoutMixin extends AbstractOrderedLayout
-with AbstractLayoutMixin with SpacingHandlerMixin with MarginHandlerMixin with LayoutClickNotifierMixin {
+trait AbstractOrderedLayoutMixin extends AbstractLayoutMixin
+with LayoutSpacingHandlerMixin with LayoutMarginHandlerMixin with LayoutAlignmentHandlerMixin with LayoutClickNotifierMixin {
+  this: AbstractOrderedLayout =>
 
   def add[C <: Component](component: C, ratio: Float = -1, alignment: Alignment = null, index: Int = -1): C = {
 

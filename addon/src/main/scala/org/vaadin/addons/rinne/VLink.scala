@@ -6,9 +6,10 @@ import com.vaadin.ui.Link
 import org.vaadin.addons.rinne.mixins.AbstractComponentMixin
 
 class VLink extends Link with AbstractComponentMixin {
+
   def targetName: Option[String] = Option(getTargetName)
 
-  def targetName_=(targetName: String) {
+  def targetName_=(targetName: String): Unit = {
     setTargetName(targetName)
   }
 

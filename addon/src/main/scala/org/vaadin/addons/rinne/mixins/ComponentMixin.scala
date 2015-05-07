@@ -5,13 +5,8 @@ import com.vaadin.ui.{Component, UI}
 import java.util.Locale
 import scala.collection.mutable
 
-trait ComponentMixin extends Component with SizeableMixin {
-
-  def styleName: Option[String] = Option(getStyleName)
-
-  def styleName_=(styleName: Option[String]) { setStyleName(styleName.orNull) }
-
-  def styleName_=(styleName: String) { setStyleName(styleName) }
+trait ComponentMixin extends SizeableMixin {
+  this: Component =>
 
   lazy val styleNames = new mutable.Set[String] with Serializable {
     def contains(key: String) = getStyleName.split(" ").iterator.contains(key)
@@ -21,6 +16,16 @@ trait ComponentMixin extends Component with SizeableMixin {
     def +=(elem: String) = { elem.split(" ").foreach(addStyleName); this }
 
     def -=(elem: String) = { removeStyleName(elem); this }
+  }
+
+  def styleName: Option[String] = Option(getStyleName)
+
+  def styleName_=(styleName: Option[String]) {
+    setStyleName(styleName.orNull)
+  }
+
+  def styleName_=(styleName: String) {
+    setStyleName(styleName)
   }
 
   def enabled: Boolean = isEnabled
@@ -37,13 +42,17 @@ trait ComponentMixin extends Component with SizeableMixin {
 
   def caption: Option[String] = Option(getCaption)
 
-  def caption_=(caption: Option[String]) { setCaption(caption.orNull) }
+  def caption_=(caption: Option[String]) {
+    setCaption(caption.orNull)
+  }
 
   def caption_=(caption: String) { setCaption(caption) }
 
   def icon: Option[Resource] = Option(getIcon)
 
-  def icon_=(icon: Option[Resource]) { setIcon(icon.orNull) }
+  def icon_=(icon: Option[Resource]) {
+    setIcon(icon.orNull)
+  }
 
   def icon_=(icon: Resource) { setIcon(icon) }
 
@@ -53,7 +62,9 @@ trait ComponentMixin extends Component with SizeableMixin {
 
   def id: Option[String] = Option(getId)
 
-  def id_=(id: Option[String]) { setId(id.orNull) }
+  def id_=(id: Option[String]) {
+    setId(id.orNull)
+  }
 
   def id_=(id: String) {
     setId(id)

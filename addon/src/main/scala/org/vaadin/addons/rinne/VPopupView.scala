@@ -1,9 +1,25 @@
 package org.vaadin.addons.rinne
 
+import java.util
+
+import com.vaadin.ui.PopupView.{PopupVisibilityEvent, PopupVisibilityListener}
 import com.vaadin.ui.{Component, HasComponents, PopupView}
+import org.vaadin.addons.rinne.events.ListenersSet
 import org.vaadin.addons.rinne.mixins.AbstractComponentMixin
 
 class VPopupView extends PopupView("", null) with AbstractComponentMixin with HasComponents {
+
+  lazy val popupVisibilityListeners = new ListenersSet[PopupVisibilityEvent, PopupVisibilityListener] {
+    override protected def addListener(listener: ListenerLambda): Unit = addPopupVisibilityListener(
+      new PopupVisibilityListener {
+        override def popupVisibilityChange(event: PopupVisibilityEvent): Unit = listener(event)
+      }
+    )
+
+    override protected def removeListener(listener: PopupVisibilityListener): Unit = removePopupVisibilityListener(listener)
+
+    override protected def listeners: util.Collection[_] = getListeners(classOf[PopupVisibilityEvent])
+  }
 
   def minimizedHtmlValue: String = getContent.getMinimizedValueAsHTML
 
@@ -42,14 +58,4 @@ class VPopupView extends PopupView("", null) with AbstractComponentMixin with Ha
   def hideOnMouseOut: Boolean = isHideOnMouseOut
 
   def hideOnMouseOut_=(hideOnMouseOut: Boolean): Unit = setHideOnMouseOut(hideOnMouseOut)
-
-  //  lazy val popupVisibilityListeners: ListenersSet[PopupView.PopupVisibilityEvent => Unit] =
-  //    new ListenersTrait[PopupView.PopupVisibilityEvent, PopupVisibilityListener] {
-  //      override def listeners = getListeners(classOf[PopupView.PopupVisibilityEvent])
-  //
-  //      override def addListener(elem: PopupView.PopupVisibilityEvent => Unit) =
-  //        addPopupVisibilityListener(new PopupVisibilityListener(elem))
-  //
-  //      override def removeListener(elem: PopupVisibilityListener) = removePopupVisibilityListener(elem)
-  //    }
 }

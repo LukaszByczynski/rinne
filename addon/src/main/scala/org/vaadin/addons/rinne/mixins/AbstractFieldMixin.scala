@@ -1,10 +1,10 @@
 package org.vaadin.addons.rinne.mixins
 
-import org.vaadin.addons.rinne.events.ValueChangeNotifier
 import com.vaadin.ui.AbstractField
 
-trait AbstractFieldMixin[T] extends AbstractField[T]
-with FieldMixin[T] with AbstractComponentMixin with ValueChangeNotifier {
+trait AbstractFieldMixin[T] extends AbstractComponentMixin
+with PropertyValueChangeNotifierMixin with PropertyReadOnlyStatusChangeNotifierMixin {
+  this: AbstractField[T] =>
 
   def validationVisible: Boolean = isValidationVisible
 
@@ -14,6 +14,9 @@ with FieldMixin[T] with AbstractComponentMixin with ValueChangeNotifier {
 
   def conversionError_=(conversionError: String): Unit = setConversionError(conversionError)
 
-  //  override def value: Option[T] = Option(getValue)
+  def value: Option[T] = Option(getValue)
 
+  def value_=(v: Option[T]): Unit = setValue(v.getOrElse(null).asInstanceOf[T])
+
+  def value_=(v: T): Unit = setValue(v)
 }

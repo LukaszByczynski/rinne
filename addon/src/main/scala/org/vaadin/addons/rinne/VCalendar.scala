@@ -56,7 +56,6 @@ class VCalendar extends Calendar with AbstractComponentMixin {
   def weeklyCaptionFormat: String = getWeeklyCaptionFormat
 
   def weeklyCaptionFormat_=(value: String): Unit = setWeeklyCaptionFormat(value)
-
 }
 
 
