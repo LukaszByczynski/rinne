@@ -8,7 +8,7 @@ import com.vaadin.data.Property.{ValueChangeEvent, ValueChangeListener}
 import com.vaadin.ui.AbstractComponent
 import org.vaadin.addons.rinne.events.ListenersSet
 
-trait ContainerItemSetChangeNotifierMixin2 {
+trait ContainerItemSetChangeNotifierMixin {
   this: AbstractComponent with Container.ItemSetChangeNotifier =>
 
   lazy val itemSetChangeListeners = new ListenersSet[Container.ItemSetChangeEvent, Container.ItemSetChangeListener] {
