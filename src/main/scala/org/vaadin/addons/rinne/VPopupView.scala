@@ -11,7 +11,7 @@ class VPopupView extends PopupView("", null) with AbstractComponentMixin with Ha
 
   lazy val popupVisibilityListeners = new ListenersSet[PopupVisibilityEvent, PopupVisibilityListener] {
     override protected def addListener(listener: ListenerLambda): Unit = addPopupVisibilityListener(
-      new PopupVisibilityListener {
+      new Listener(listener) with PopupVisibilityListener {
         override def popupVisibilityChange(event: PopupVisibilityEvent): Unit = listener(event)
       }
     )

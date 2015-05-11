@@ -3,7 +3,7 @@ package org.vaadin.addons.rinne
 import java.util
 
 import com.vaadin.ui.Window
-import com.vaadin.ui.Window.{CloseListener, ResizeListener, ResizeEvent, CloseEvent}
+import com.vaadin.ui.Window.{CloseEvent, CloseListener, ResizeEvent, ResizeListener}
 import org.vaadin.addons.rinne.events.ListenersSet
 import org.vaadin.addons.rinne.mixins.{BlurNotifierMixin, FocusNotifierMixin, PanelMixin}
 
@@ -11,7 +11,7 @@ class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNo
 
   lazy val closeListeners = new ListenersSet[CloseEvent, CloseListener] {
     override protected def addListener(listener: ListenerLambda): Unit = addCloseListener(
-      new CloseListener {
+      new Listener(listener) with CloseListener {
         override def windowClose(e: CloseEvent): Unit = listener(e)
       }
     )
@@ -22,7 +22,7 @@ class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNo
   }
   lazy val resizeListeners = new ListenersSet[ResizeEvent, ResizeListener] {
     override protected def addListener(listener: ListenerLambda): Unit = addResizeListener(
-      new ResizeListener {
+      new Listener(listener) with ResizeListener {
         override def windowResized(e: ResizeEvent): Unit = listener(e)
       }
     )

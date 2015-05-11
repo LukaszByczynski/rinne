@@ -1,8 +1,7 @@
 package org.vaadin.addons.rinne.mixins
 
 import com.vaadin.ui.Layout.MarginHandler
-
-case class Margin(top: Boolean = false, right: Boolean = false, bottom: Boolean = false, left: Boolean = false)
+import org.vaadin.addons.rinne.Margin
 
 trait LayoutMarginHandlerMixin {
   this: MarginHandler =>

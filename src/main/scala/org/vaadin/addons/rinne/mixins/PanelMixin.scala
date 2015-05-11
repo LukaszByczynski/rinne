@@ -2,7 +2,7 @@ package org.vaadin.addons.rinne.mixins
 
 import com.vaadin.ui.Panel
 
-trait PanelMixin extends AbstractSingleComponentContainerMixin with FocusableMixin {
+trait PanelMixin extends AbstractSingleComponentContainerMixin with FocusableMixin with MouseClickNotifierMixin {
   this: Panel =>
 
   def scrollLeft: Int = getScrollLeft

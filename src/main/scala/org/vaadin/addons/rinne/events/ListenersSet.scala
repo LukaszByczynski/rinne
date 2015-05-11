@@ -40,7 +40,7 @@ trait ListenersSet[E, L] extends mutable.Set[E => Unit] with Serializable {
 
   override def -=(elem: E => Unit) = {
     listeners.asScala.foreach {
-      case e: Listener if e == elem => removeListener(e.asInstanceOf[L])
+      case e: Listener if e.action == elem => removeListener(e.asInstanceOf[L])
       case _ =>
     }
     this

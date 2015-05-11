@@ -3,7 +3,7 @@ package org.vaadin.addons.rinne
 import com.vaadin.data.util.converter.Converter
 import com.vaadin.shared.ui.label.ContentMode
 import com.vaadin.ui.Label
-import org.vaadin.addons.rinne.mixins.{PropertyViewerMixin, AbstractComponentMixin, PropertyMixin, PropertyValueChangeNotifierMixin}
+import org.vaadin.addons.rinne.mixins.{AbstractComponentMixin, PropertyMixin, PropertyValueChangeNotifierMixin, PropertyViewerMixin}
 
 class VLabel extends Label with AbstractComponentMixin
 with PropertyMixin[String] with PropertyValueChangeNotifierMixin with PropertyViewerMixin {
@@ -15,6 +15,10 @@ with PropertyMixin[String] with PropertyValueChangeNotifierMixin with PropertyVi
   }
 
   def converter: Option[Converter[String, _]] = Option(getConverter)
+
+  def converter_=(converter: Option[Converter[String, _]]) {
+    setConverter(converter.orNull)
+  }
 
   def converter_=(converter: Converter[String, _]) {
     setConverter(converter)
