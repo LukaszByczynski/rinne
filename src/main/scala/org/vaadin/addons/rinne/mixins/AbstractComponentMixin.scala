@@ -4,6 +4,7 @@ import java.util
 import java.util.Locale
 
 import com.vaadin.event.ShortcutListener
+import com.vaadin.server.ClientConnector.{AttachEvent, AttachListener, DetachEvent, DetachListener}
 import com.vaadin.ui.AbstractComponent
 import org.vaadin.addons.rinne.KeyShortcutAction
 import org.vaadin.addons.rinne.events.ListenersSet
@@ -12,6 +13,32 @@ trait AbstractComponentMixin extends ComponentMixin {
   this: AbstractComponent =>
 
   lazy val shortcutListeners = new ShortcutListenersSet()
+
+  lazy val attachListeners = new ListenersSet[AttachEvent, AttachListener] {
+
+    override protected def addListener(listener: ListenerLambda): Unit = addAttachListener(
+      new Listener(listener) with AttachListener {
+        override def attach(attachEvent: AttachEvent): Unit = listener.apply(attachEvent)
+      }
+    )
+
+    override protected def removeListener(listener: AttachListener): Unit = removeAttachListener(listener)
+
+    override protected def listeners: util.Collection[_] = getListeners(classOf[AttachEvent])
+  }
+
+  lazy val detachListeners = new ListenersSet[DetachEvent, DetachListener] {
+
+    override protected def addListener(listener: ListenerLambda): Unit = addDetachListener(
+      new Listener(listener) with DetachListener {
+        override def detach(detachEvent: DetachEvent): Unit = listener.apply(detachEvent)
+      }
+    )
+
+    override protected def removeListener(listener: DetachListener): Unit = removeDetachListener(listener)
+
+    override protected def listeners: util.Collection[_] = getListeners(classOf[DetachEvent])
+  }
 
   def locale_=(locale: Option[Locale]): Unit = setLocale(locale.orNull)
 
@@ -23,9 +50,9 @@ trait AbstractComponentMixin extends ComponentMixin {
 
   def description: Option[String] = Option(getDescription)
 
-  def description_=(description: String): Unit = setDescription(description)
-
   def description_=(description: Option[String]): Unit = setDescription(description.orNull)
+
+  def description_=(description: String): Unit = setDescription(description)
 
   def immediate: Boolean = isImmediate
 
