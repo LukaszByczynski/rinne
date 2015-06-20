@@ -1,6 +1,7 @@
 package org.vaadin.addons.rinne.mixins
 
 import java.util
+import java.util.Locale
 
 import com.vaadin.event.ShortcutListener
 import com.vaadin.ui.AbstractComponent
@@ -12,11 +13,19 @@ trait AbstractComponentMixin extends ComponentMixin {
 
   lazy val shortcutListeners = new ShortcutListenersSet()
 
+  def locale_=(locale: Option[Locale]): Unit = setLocale(locale.orNull)
+
+  def locale_=(locale: Locale): Unit = setLocale(locale)
+
+  def captionAsHtml: Boolean = isCaptionAsHtml
+
+  def captionAsHtml_=(captionAsHtml: Boolean): Unit = setCaptionAsHtml(captionAsHtml)
+
   def description: Option[String] = Option(getDescription)
 
-  def description_=(description: Option[String]): Unit = setDescription(description.orNull)
-
   def description_=(description: String): Unit = setDescription(description)
+
+  def description_=(description: Option[String]): Unit = setDescription(description.orNull)
 
   def immediate: Boolean = isImmediate
 
@@ -27,6 +36,7 @@ trait AbstractComponentMixin extends ComponentMixin {
   def data_=(data: Any): Unit = setData(data)
 
   class ShortcutListenersSet extends ListenersSet[Any, ShortcutListener] {
+
     private val _listenersToKeyShortcutActionMap = new util.HashMap[KeyShortcutAction, ShortcutListener]()
 
     def +=(elem: KeyShortcutAction) = {
