@@ -1,6 +1,6 @@
 organization := "org.vaadin.addons"
 name := "rinne"
-version := "0.5.0-SNAPSHOT"
+version := "0.5.0"
 
 scalaVersion := "2.11.6"
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
