@@ -90,6 +90,7 @@ class AbstractSplitPanelMixinSpec extends FunSpec {
       splitPanel.maxSplitPosition = None
       assert(Some(splitPanel.maxSplitPosition) === 100.pct)
     }
+
     describe("splitterClickListeners should") {
 
       val listener1 = (e: SplitterClickEvent) => println("1")

@@ -2,7 +2,7 @@ package org.vaadin.addons.rinne.mixins
 
 import java.util
 
-import com.vaadin.event.FieldEvents.{TextChangeListener, TextChangeEvent}
+import com.vaadin.event.FieldEvents.{TextChangeEvent, TextChangeListener}
 import com.vaadin.ui.AbstractTextField
 import org.vaadin.addons.rinne.events.ListenersSet
 
@@ -12,8 +12,9 @@ trait AbstractTextFieldMixin extends AbstractFieldMixin[String] with BlurNotifie
   nullRepresentation = ""
 
   lazy val textChangeListeners = new ListenersSet[TextChangeEvent, TextChangeListener] {
+
     override protected def addListener(listener: ListenerLambda): Unit = addTextChangeListener(
-      new TextChangeListener {
+      new Listener(listener) with TextChangeListener {
         override def textChange(event: TextChangeEvent): Unit = listener(event)
       }
     )
@@ -25,12 +26,12 @@ trait AbstractTextFieldMixin extends AbstractFieldMixin[String] with BlurNotifie
 
   def prompt: Option[String] = Option(getInputPrompt)
 
-  def prompt_=(prompt: Option[String]) {
-    setInputPrompt(prompt.orNull)
-  }
-
   def prompt_=(prompt: String) {
     setInputPrompt(prompt)
+  }
+
+  def prompt_=(prompt: Option[String]) {
+    setInputPrompt(prompt.orNull)
   }
 
   def nullRepresentation: String = getNullRepresentation
