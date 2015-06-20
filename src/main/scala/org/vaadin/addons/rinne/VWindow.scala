@@ -45,13 +45,17 @@ class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNo
     }
   }
 
-  def positionX: Int = getPositionX  def closeKeyShortcut: Option[KeyShortcut] = _closeKeyShortcut
+  def positionX: Int = getPositionX
 
-  def positionX_=(positionX: Int): Unit = setPositionX(positionX)  def closeKeyShortcut_=(cs: KeyShortcut): Unit = this.closeKeyShortcut = Option(cs)
+  def positionX_=(positionX: Int): Unit = setPositionX(positionX)
+
+  def closeKeyShortcut: Option[KeyShortcut] = _closeKeyShortcut
 
   def positionY: Int = getPositionY
 
   def positionY_=(positionY: Int): Unit = setPositionY(positionY)
+
+  def closeKeyShortcut_=(cs: KeyShortcut): Unit = this.closeKeyShortcut = Option(cs)
 
   def resizable: Boolean = isResizable
 
@@ -68,9 +72,6 @@ class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNo
   def draggable: Boolean = isDraggable
 
   def draggable_=(draggable: Boolean) = setDraggable(draggable)
-
-
-
 
 
 }
