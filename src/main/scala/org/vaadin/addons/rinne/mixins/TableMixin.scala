@@ -11,43 +11,47 @@ trait TableMixin extends AbstractSelectMixin with ItemClickNotifierMixin {
   this: Table =>
 
   lazy val headerClickListeners = new ListenersSet[HeaderClickEvent, HeaderClickListener] {
+
     override def listeners = getListeners(classOf[HeaderClickEvent])
 
     override protected def addListener(listener: ListenerLambda): Unit = addHeaderClickListener(
-      new HeaderClickListener {
+      new Listener(listener) with HeaderClickListener {
         override def headerClick(event: HeaderClickEvent): Unit = listener(event)
       }
     )
 
     override protected def removeListener(listener: HeaderClickListener): Unit = removeHeaderClickListener(listener)
   }
+
   lazy val footerClickListeners = new ListenersSet[FooterClickEvent, FooterClickListener] {
     override def listeners = getListeners(classOf[FooterClickEvent])
 
     override protected def addListener(listener: ListenerLambda): Unit = addFooterClickListener(
-      new FooterClickListener {
+      new Listener(listener) with FooterClickListener {
         override def footerClick(event: FooterClickEvent): Unit = listener(event)
       }
     )
 
     override protected def removeListener(listener: FooterClickListener): Unit = removeFooterClickListener(listener)
   }
+
   lazy val columnResizeListeners = new ListenersSet[ColumnResizeEvent, ColumnResizeListener] {
     override def listeners = getListeners(classOf[ColumnResizeEvent])
 
     override protected def addListener(listener: ListenerLambda): Unit = addColumnResizeListener(
-      new ColumnResizeListener {
+      new Listener(listener) with ColumnResizeListener {
         override def columnResize(event: ColumnResizeEvent): Unit = listener(event)
       }
     )
 
     override protected def removeListener(listener: ColumnResizeListener): Unit = removeColumnResizeListener(listener)
   }
+
   lazy val columnReorderListeners = new ListenersSet[ColumnReorderEvent, ColumnReorderListener] {
-    override def listeners = getListeners(classOf[ColumnResizeEvent])
+    override def listeners = getListeners(classOf[ColumnReorderEvent])
 
     override protected def addListener(listener: ListenerLambda): Unit = addColumnReorderListener(
-      new ColumnReorderListener {
+      new Listener(listener) with ColumnReorderListener {
         override def columnReorder(event: ColumnReorderEvent): Unit = listener(event)
       }
     )
@@ -65,20 +69,20 @@ trait TableMixin extends AbstractSelectMixin with ItemClickNotifierMixin {
 
   def columnHeaders: Seq[Option[String]] = getColumnHeaders.map(Option(_)).toSeq
 
-  def columnHeaders_=(columnHeaders: => Seq[String]): Unit = setColumnHeaders(columnHeaders: _*)
-
   def columnHeaders_=(columnHeaders: Seq[Option[String]]): Unit =
     setColumnHeaders(columnHeaders map {
       _.orNull
     }: _*)
 
-  def columnIcons: Seq[Option[Resource]] = getColumnIcons.map(Option(_)).toSeq
+  def columnHeaders_=(columnHeaders: => Seq[String]): Unit = setColumnHeaders(columnHeaders: _*)
 
-  def columnIcons_=(columnIcons: => Seq[Resource]): Unit = setColumnIcons(columnIcons: _*)
+  def columnIcons: Seq[Option[Resource]] = getColumnIcons.map(Option(_)).toSeq
 
   def columnIcons_=(columnIcons: Seq[Option[Resource]]): Unit = setColumnIcons(columnIcons map {
     _.orNull
   }: _*)
+
+  def columnIcons_=(columnIcons: => Seq[Resource]): Unit = setColumnIcons(columnIcons: _*)
 
   def columnAlignments: Seq[Table.Align] = getColumnAlignments.toSeq
 
@@ -136,12 +140,12 @@ trait TableMixin extends AbstractSelectMixin with ItemClickNotifierMixin {
 
   def sortContainerPropertyId: Option[Any] = Option(getSortContainerPropertyId)
 
-  def sortContainerPropertyId_=(sortContainerPropertyId: Option[Any]) {
-    setSortContainerPropertyId(sortContainerPropertyId.orNull)
-  }
-
   def sortContainerPropertyId_=(sortContainerPropertyId: Any) {
     setSortContainerPropertyId(sortContainerPropertyId)
+  }
+
+  def sortContainerPropertyId_=(sortContainerPropertyId: Option[Any]) {
+    setSortContainerPropertyId(sortContainerPropertyId.orNull)
   }
 
   def sortAscending: Boolean = isSortAscending

@@ -10,6 +10,7 @@ import org.vaadin.addons.rinne.mixins.{BlurNotifierMixin, FocusNotifierMixin, Pa
 class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNotifierMixin {
 
   lazy val closeListeners = new ListenersSet[CloseEvent, CloseListener] {
+
     override protected def addListener(listener: ListenerLambda): Unit = addCloseListener(
       new Listener(listener) with CloseListener {
         override def windowClose(e: CloseEvent): Unit = listener(e)
@@ -20,7 +21,9 @@ class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNo
 
     override protected def listeners: util.Collection[_] = getListeners(classOf[CloseEvent])
   }
+
   lazy val resizeListeners = new ListenersSet[ResizeEvent, ResizeListener] {
+
     override protected def addListener(listener: ListenerLambda): Unit = addResizeListener(
       new Listener(listener) with ResizeListener {
         override def windowResized(e: ResizeEvent): Unit = listener(e)
@@ -42,13 +45,9 @@ class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNo
     }
   }
 
-  def closeKeyShortcut: Option[KeyShortcut] = _closeKeyShortcut
+  def positionX: Int = getPositionX  def closeKeyShortcut: Option[KeyShortcut] = _closeKeyShortcut
 
-  def closeKeyShortcut_=(cs: KeyShortcut): Unit = this.closeKeyShortcut = Option(cs)
-
-  def positionX: Int = getPositionX
-
-  def positionX_=(positionX: Int): Unit = setPositionX(positionX)
+  def positionX_=(positionX: Int): Unit = setPositionX(positionX)  def closeKeyShortcut_=(cs: KeyShortcut): Unit = this.closeKeyShortcut = Option(cs)
 
   def positionY: Int = getPositionY
 
@@ -69,5 +68,9 @@ class VWindow extends Window with PanelMixin with BlurNotifierMixin with FocusNo
   def draggable: Boolean = isDraggable
 
   def draggable_=(draggable: Boolean) = setDraggable(draggable)
+
+
+
+
 
 }

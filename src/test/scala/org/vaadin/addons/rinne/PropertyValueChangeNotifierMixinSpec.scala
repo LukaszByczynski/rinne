@@ -4,6 +4,7 @@ import com.vaadin.data.Property
 import org.scalatest.FunSpec
 
 class PropertyValueChangeNotifierMixinSpec extends FunSpec {
+
   describe("valueChangeListeners should") {
 
     val listener1 = (e: Property.ValueChangeEvent) => println("1")

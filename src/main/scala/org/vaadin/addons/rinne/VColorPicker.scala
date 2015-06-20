@@ -10,6 +10,7 @@ import org.vaadin.addons.rinne.mixins.AbstractComponentMixin
 class VColorPicker extends ColorPicker with AbstractComponentMixin {
 
   lazy val colorChangeListeners = new ListenersSet[ColorChangeEvent, ColorChangeListener] {
+
     override protected def addListener(listener: ListenerLambda): Unit = addColorChangeListener(
       new Listener(listener) with ColorChangeListener {
         override def colorChanged(event: ColorChangeEvent): Unit = listener(event)
