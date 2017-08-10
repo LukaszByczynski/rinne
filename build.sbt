@@ -12,7 +12,7 @@ name := "rinne"
 version := "0.8.3"
 
 scalaVersion in ThisBuild := "2.12.3"
-scalacOptions ++= Seq("-unchecked", "-feature")
+scalacOptions ++= Seq("-unchecked", "-feature", "-Yrangepos")
 parallelExecution := false
 
 publishTo := Some(bizbeamResolver)
@@ -28,6 +28,8 @@ libraryDependencies ++= {
     "javax.servlet" % "servlet-api" % "2.5" % "provided",
 
     "org.scalatest" %% "scalatest" % "3.0.3" % "test",
+    "org.specs2" %% "specs2-core" % "3.9.1" % "test",
+
     "org.mockito" % "mockito-core" % "2.8.47" % "test"
   )
 }

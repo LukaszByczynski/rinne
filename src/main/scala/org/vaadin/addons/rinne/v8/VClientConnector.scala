@@ -18,4 +18,5 @@ class VClientConnector(clientConnector: ClientConnector) {
 
   def errorHandler_=(errorHandler: ErrorHandler): Unit = clientConnector.setErrorHandler(errorHandler)
 
+  def parent: ClientConnector = clientConnector.getParent
 }

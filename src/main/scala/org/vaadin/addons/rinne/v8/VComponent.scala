@@ -6,6 +6,7 @@ class VComponent(component: Component) {
 
   def id  = component.getId
 
+  component.getParent
 
 
 }

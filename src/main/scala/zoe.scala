@@ -1,10 +1,8 @@
 package ios
 
-import com.vaadin.ui.{AbstractField, RichTextArea, TextField}
+import com.vaadin.ui.RichTextArea
 
 package zoe {
-
-  import org.vaadin.addons.rinne.v8.VClientConnector
 
   import scala.language.implicitConversions
 
@@ -20,27 +18,14 @@ package zoe {
 
 object Test {
 
-  import scala.language.implicitConversions
-
   import org.vaadin.addons.rinne.v8._
-  import ios.zoe.opos._
+
+  import scala.language.implicitConversions
 
   //val a = new TextField()
   //a.value2
   val b = new RichTextArea()
-  b.value
-  b.valueChangeListeners += {
-    println()
-  }
-
-  b.valueChangeListeners += {
-    println("opoka")
-  }
-
-  b.value
-
-  b.id 
-  b.ui.push()
+  b.width = 200.px
 
 
 
