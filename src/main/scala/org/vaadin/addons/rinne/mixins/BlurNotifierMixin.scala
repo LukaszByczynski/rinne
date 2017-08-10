@@ -1,25 +1,20 @@
 package org.vaadin.addons.rinne.mixins
 
-import java.util
-
 import com.vaadin.event.FieldEvents.{BlurEvent, BlurListener, BlurNotifier}
-import com.vaadin.server.AbstractClientConnector
 import com.vaadin.ui.AbstractComponent
 import org.vaadin.addons.rinne.events.ListenersSet
 
-trait BlurNotifierMixin {
-  this: AbstractComponent with BlurNotifier =>
+trait BlurNotifierMixin extends AbstractComponentMixin  with BlurNotifier {
+  this: AbstractComponent =>
 
   lazy val blurListeners = new ListenersSet[BlurEvent, BlurListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addBlurListener(
-      new Listener(listener) with BlurListener {
-        override def blur(blurEvent: BlurEvent): Unit = listener(blurEvent)
-      }
+      (blurEvent: BlurEvent) => listener(blurEvent)
     )
 
-    override protected def removeListener(listener: BlurListener): Unit = removeBlurListener(listener)
+    override protected def removeListener(listener: BlurListener): Unit = removeListener(listener)
 
-    override protected def listeners: util.Collection[_] = getListeners(classOf[BlurEvent])
+    override protected def listeners: java.util.Collection[_] = getListeners(classOf[BlurEvent])
   }
 }

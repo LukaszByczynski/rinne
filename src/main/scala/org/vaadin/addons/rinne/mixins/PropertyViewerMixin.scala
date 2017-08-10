@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne.mixins
 
-import com.vaadin.data.Property
+import com.vaadin.v7.data.Property
 
 trait PropertyViewerMixin {
   this: Property.Viewer =>

@@ -1,7 +1,7 @@
 package org.vaadin.addons.rinne
 
 import com.vaadin.shared.ui.MultiSelectMode
-import com.vaadin.ui.Tree
+import com.vaadin.v7.ui.Tree
 import org.vaadin.addons.rinne.mixins.{AbstractSelectMixin, ItemClickNotifierMixin}
 
 class VTree extends Tree with AbstractSelectMixin with ItemClickNotifierMixin {

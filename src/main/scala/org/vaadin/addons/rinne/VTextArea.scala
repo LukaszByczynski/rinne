@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne
 
-import com.vaadin.ui.TextArea
+import com.vaadin.v7.ui.TextArea
 import org.vaadin.addons.rinne.mixins.AbstractTextFieldMixin
 
 class VTextArea extends TextArea with AbstractTextFieldMixin {

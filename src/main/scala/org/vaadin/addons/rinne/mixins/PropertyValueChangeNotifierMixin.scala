@@ -2,20 +2,18 @@ package org.vaadin.addons.rinne.mixins
 
 import java.util
 
-import com.vaadin.data.Property
-import com.vaadin.data.Property.{ValueChangeListener, ValueChangeEvent}
-import com.vaadin.ui.AbstractComponent
+import com.vaadin.v7.data.Property
+import com.vaadin.v7.data.Property.{ValueChangeEvent, ValueChangeListener}
+import com.vaadin.v7.ui.AbstractLegacyComponent
 import org.vaadin.addons.rinne.events.ListenersSet
 
 trait PropertyValueChangeNotifierMixin {
-  this: AbstractComponent with Property.ValueChangeNotifier =>
+  this: AbstractLegacyComponent with Property.ValueChangeNotifier =>
 
   lazy val valueChangeListeners = new ListenersSet[ValueChangeEvent, ValueChangeListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addValueChangeListener(
-      new Listener(listener) with ValueChangeListener {
-        override def valueChange(event: ValueChangeEvent): Unit = listener(event)
-      }
+      (event: ValueChangeEvent) => listener(event)
     )
 
     override protected def removeListener(listener: ValueChangeListener): Unit = removeValueChangeListener(listener)

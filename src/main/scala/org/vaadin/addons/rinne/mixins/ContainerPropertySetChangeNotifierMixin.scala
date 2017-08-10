@@ -2,20 +2,18 @@ package org.vaadin.addons.rinne.mixins
 
 import java.util
 
-import com.vaadin.data.Container
-import com.vaadin.data.Container.{PropertySetChangeEvent, ItemSetChangeEvent}
-import com.vaadin.ui.AbstractComponent
+import com.vaadin.v7.data.Container
+import com.vaadin.v7.data.Container.PropertySetChangeEvent
+import com.vaadin.v7.ui.AbstractLegacyComponent
 import org.vaadin.addons.rinne.events.ListenersSet
 
-trait ContainerPropertySetChangeNotifierMixin {
-  this: AbstractComponent with Container.PropertySetChangeNotifier =>
+trait ContainerPropertySetChangeNotifierMixin extends AbstractComponentMixin {
+  this: AbstractLegacyComponent with Container.PropertySetChangeNotifier =>
 
   lazy val propertySetChangeListeners = new ListenersSet[Container.PropertySetChangeEvent, Container.PropertySetChangeListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addPropertySetChangeListener(
-      new Listener(listener) with Container.PropertySetChangeListener {
-        override def containerPropertySetChange(event: PropertySetChangeEvent): Unit = listener(event)
-      }
+      (event: PropertySetChangeEvent) => listener(event)
     )
 
     override protected def removeListener(listener: Container.PropertySetChangeListener): Unit = removePropertySetChangeListener(listener)

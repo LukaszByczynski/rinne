@@ -1,11 +1,35 @@
+lazy val bizbeamResolver = {
+  Resolver.sftp("bizbeam", "test.bizbeam.com", "repository")(
+    Patterns(
+      Nil, Resolver.mavenStyleBasePattern :: Nil, isMavenCompatible = true, descriptorOptional = true,
+      skipConsistencyCheck = true
+    )
+  ) as("ismdev", Path.userHome / ".ssh" / "id_bizbeam_rsa")
+}
+
 organization := "org.vaadin.addons"
 name := "rinne"
-version := "0.6.0"
+version := "0.8.3"
 
-scalaVersion := "2.12.2"
-scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature")
-crossScalaVersions := Seq("2.10.5", "2.11.11")
+scalaVersion in ThisBuild := "2.12.3"
+scalacOptions ++= Seq("-unchecked", "-feature")
+parallelExecution := false
 
-libraryDependencies ++= Dependencies.addon(scalaVersion.value)
+publishTo := Some(bizbeamResolver)
+
+libraryDependencies ++= {
+
+  val vaadinVersion = "8.1.0"
+
+  Seq(
+    "org.scala-lang" % "scala-reflect" % scalaVersion.value,
+    "com.vaadin" % "vaadin-server" % vaadinVersion % "provided",
+    "com.vaadin" % "vaadin-compatibility-server" % vaadinVersion % "provided",
+    "javax.servlet" % "servlet-api" % "2.5" % "provided",
+
+    "org.scalatest" %% "scalatest" % "3.0.3" % "test",
+    "org.mockito" % "mockito-core" % "2.8.47" % "test"
+  )
+}
 
 vaadinAddOnSettings

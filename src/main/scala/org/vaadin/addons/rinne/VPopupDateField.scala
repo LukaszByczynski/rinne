@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne
 
-import com.vaadin.ui.PopupDateField
+import com.vaadin.v7.ui.PopupDateField
 import org.vaadin.addons.rinne.mixins.DateFieldMixin
 
 class VPopupDateField extends PopupDateField with DateFieldMixin {

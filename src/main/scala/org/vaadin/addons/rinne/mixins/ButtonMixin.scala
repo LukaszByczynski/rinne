@@ -13,9 +13,7 @@ trait ButtonMixin extends AbstractComponentMixin with BlurNotifierMixin with Foc
   lazy val clickListeners = new ListenersSet[Button.ClickEvent, Button.ClickListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addClickListener(
-      new Listener(listener) with Button.ClickListener {
-        override def buttonClick(event: ClickEvent): Unit = listener(event)
-      }
+      (event: ClickEvent) => listener(event)
     )
 
     override protected def removeListener(listener: Button.ClickListener): Unit = removeClickListener(listener)

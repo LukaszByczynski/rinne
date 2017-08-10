@@ -8,18 +8,14 @@ import com.vaadin.ui.{AbstractSplitPanel, Component}
 import org.vaadin.addons.rinne.events.ListenersSet
 import org.vaadin.addons.rinne.{Measure, Units}
 
-trait AbstractSplitPanelMixin extends ComponentContainerMixin with SizeableMixin {
-  this: AbstractSplitPanel =>
-
+trait AbstractSplitPanelMixin extends AbstractSplitPanel with ComponentContainerMixin with SizeableMixin {
   lazy val splitterClickListeners = new ListenersSet[SplitterClickEvent, SplitterClickListener] {
 
-    override protected def addListener(listener: ListenerLambda): Unit = addSplitterClickListener(
-      new Listener(listener) with SplitterClickListener {
-        override def splitterClick(event: SplitterClickEvent): Unit = listener(event)
-      }
+    override protected def addListener(listener: ListenerLambda): Unit = AbstractSplitPanelMixin.this.addSplitterClickListener(
+      (event: SplitterClickEvent) => listener(event)
     )
 
-    override protected def removeListener(listener: SplitterClickListener): Unit = removeSplitterClickListener(listener)
+    override protected def removeListener(listener: SplitterClickListener): Unit = AbstractSplitPanelMixin.this.removeSplitterClickListener(listener)
 
     override protected def listeners: util.Collection[_] = getListeners(classOf[SplitterClickEvent])
   }

@@ -1,7 +1,7 @@
 package org.vaadin.addons.rinne.helpers
 
-import com.vaadin.data.Property.{ReadOnlyStatusChangeEvent, ReadOnlyStatusChangeListener}
-import com.vaadin.ui.AbstractField
+import com.vaadin.v7.data.Property.{ReadOnlyStatusChangeEvent, ReadOnlyStatusChangeListener}
+import com.vaadin.v7.ui.AbstractField
 import org.vaadin.addons.rinne.mixins.AbstractFieldMixin
 
 trait HideWhenEmptyMixin[T] extends AbstractFieldMixin[T] {

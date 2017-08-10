@@ -2,18 +2,16 @@ package org.vaadin.addons.rinne.mixins
 
 import java.util
 
-import com.vaadin.ui.TabSheet.{SelectedTabChangeEvent, SelectedTabChangeListener}
 import com.vaadin.ui.{Component, TabSheet}
+import com.vaadin.ui.TabSheet.{SelectedTabChangeEvent, SelectedTabChangeListener}
 import org.vaadin.addons.rinne.events._
 
-trait TabSheetMixin extends AbstractComponentMixin with FocusNotifierMixin with BlurNotifierMixin {
+trait TabSheetMixin {
   this: TabSheet =>
 
   lazy val selectedTabChangeListeners = new ListenersSet[TabSheet.SelectedTabChangeEvent, SelectedTabChangeListener] {
     override protected def addListener(listener: ListenerLambda): Unit = addSelectedTabChangeListener(
-      new Listener(listener) with SelectedTabChangeListener {
-        override def selectedTabChange(selectedTabChangeEvent: SelectedTabChangeEvent): Unit = listener(selectedTabChangeEvent)
-      }
+      (selectedTabChangeEvent: SelectedTabChangeEvent) => listener(selectedTabChangeEvent)
     )
 
     override protected def removeListener(listener: SelectedTabChangeListener): Unit = removeSelectedTabChangeListener(listener)

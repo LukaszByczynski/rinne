@@ -2,7 +2,8 @@ package org.vaadin.addons.rinne.mixins
 
 import com.vaadin.ui.Component
 
-trait FocusableMixin extends ComponentMixin {
+
+trait FocusableMixin {
   this: Component.Focusable =>
 
   def tabIndex: Int = getTabIndex

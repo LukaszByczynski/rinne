@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne
 
-import com.vaadin.ui.NativeSelect
-import org.vaadin.addons.rinne.mixins.{FocusNotifierMixin, BlurNotifierMixin, AbstractSelectMixin}
+import com.vaadin.v7.ui.NativeSelect
+import org.vaadin.addons.rinne.mixins.{AbstractSelectMixin, BlurNotifierMixin, FocusNotifierMixin}
 
-class VNativeSelect extends NativeSelect with AbstractSelectMixin with BlurNotifierMixin with FocusNotifierMixin
+class VNativeSelect extends NativeSelect with AbstractSelectMixin

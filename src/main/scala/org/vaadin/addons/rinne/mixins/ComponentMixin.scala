@@ -1,8 +1,10 @@
 package org.vaadin.addons.rinne.mixins
 
+import java.util.Locale
+
 import com.vaadin.server.Resource
 import com.vaadin.ui.{Component, UI}
-import java.util.Locale
+
 import scala.collection.mutable
 
 trait ComponentMixin extends SizeableMixin {
@@ -13,9 +15,15 @@ trait ComponentMixin extends SizeableMixin {
 
     def iterator: Iterator[String] = getStyleName.split(" ").iterator
 
-    def +=(elem: String) = { elem.split(" ").foreach(addStyleName); this }
+    def +=(elem: String) = {
+      elem.split(" ").foreach(addStyleName);
+      this
+    }
 
-    def -=(elem: String) = { removeStyleName(elem); this }
+    def -=(elem: String) = {
+      removeStyleName(elem);
+      this
+    }
   }
 
   def styleName: Option[String] = Option(getStyleName)
@@ -30,15 +38,15 @@ trait ComponentMixin extends SizeableMixin {
 
   def enabled: Boolean = isEnabled
 
-  def enabled_=(enabled: Boolean) { setEnabled(enabled) }
+  def enabled_=(enabled: Boolean) {
+    setEnabled(enabled)
+  }
 
   def visible: Boolean = isVisible
 
-  def visible_=(visible: Boolean) { setVisible(visible) }
-
-  def readOnly: Boolean = isReadOnly
-
-  def readOnly_=(readOnly: Boolean) { setReadOnly(readOnly) }
+  def visible_=(visible: Boolean) {
+    setVisible(visible)
+  }
 
   def caption: Option[String] = Option(getCaption)
 
@@ -46,7 +54,9 @@ trait ComponentMixin extends SizeableMixin {
     setCaption(caption.orNull)
   }
 
-  def caption_=(caption: String) { setCaption(caption) }
+  def caption_=(caption: String) {
+    setCaption(caption)
+  }
 
   def icon: Option[Resource] = Option(getIcon)
 
@@ -54,7 +64,9 @@ trait ComponentMixin extends SizeableMixin {
     setIcon(icon.orNull)
   }
 
-  def icon_=(icon: Resource) { setIcon(icon) }
+  def icon_=(icon: Resource) {
+    setIcon(icon)
+  }
 
   def ui: UI = getUI
 

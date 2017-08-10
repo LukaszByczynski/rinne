@@ -1,10 +1,12 @@
 package org.vaadin.addons.rinne.mixins
 
-import com.vaadin.data.BufferedValidatable
-import com.vaadin.ui.{Field, Component}
+
+import com.vaadin.ui.Component.Focusable
+import com.vaadin.v7.data.BufferedValidatable
+import com.vaadin.v7.ui.Field
 
 trait FieldMixin[T] extends Field[T]
-with ComponentMixin with PropertyMixin[T] with BufferedValidatable with Component.Focusable {
+  with ComponentMixin with PropertyMixin[T] with BufferedValidatable with Focusable {
 
   def required: Boolean = isRequired
 

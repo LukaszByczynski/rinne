@@ -1,29 +1,24 @@
 package org.vaadin.addons.rinne.mixins
 
-import java.util
-
-import com.vaadin.event.FieldEvents.{TextChangeEvent, TextChangeListener}
-import com.vaadin.ui.AbstractTextField
+import com.vaadin.v7.event.FieldEvents.{TextChangeEvent, TextChangeListener}
+import com.vaadin.v7.ui.AbstractTextField
 import org.vaadin.addons.rinne.events.ListenersSet
 
-trait AbstractTextFieldMixin extends AbstractFieldMixin[String] with BlurNotifierMixin with FocusNotifierMixin {
-  this: AbstractTextField =>
+trait AbstractTextFieldMixin extends AbstractTextField with AbstractFieldMixin[String] {
 
   nullRepresentation = ""
 
   lazy val textChangeListeners = new ListenersSet[TextChangeEvent, TextChangeListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addTextChangeListener(
-      new Listener(listener) with TextChangeListener {
-        override def textChange(event: TextChangeEvent): Unit = listener(event)
-      }
+      (event: TextChangeEvent) => listener(event)
     )
 
     override protected def removeListener(listener: TextChangeListener): Unit = removeTextChangeListener(listener)
 
-    override protected def listeners: util.Collection[_] = getListeners(classOf[TextChangeEvent])
+    override protected def listeners: java.util.Collection[_] = getListeners(classOf[TextChangeEvent])
   }
-
+  
   def prompt: Option[String] = Option(getInputPrompt)
 
   def prompt_=(prompt: String) {

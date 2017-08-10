@@ -3,8 +3,8 @@ package org.vaadin.addons.rinne
 import java.util.Date
 
 import com.vaadin.event.dd.DropHandler
-import com.vaadin.ui.Calendar
-import com.vaadin.ui.components.calendar.event.CalendarEventProvider
+import com.vaadin.v7.ui.Calendar
+import com.vaadin.v7.ui.components.calendar.event.CalendarEventProvider
 import org.vaadin.addons.rinne.mixins.AbstractComponentMixin
 
 class VCalendar extends Calendar with AbstractComponentMixin {

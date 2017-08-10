@@ -2,13 +2,39 @@ package org.vaadin.addons.rinne.mixins
 
 import java.util.{TimeZone, Date}
 
-import com.vaadin.shared.ui.datefield.Resolution
-import com.vaadin.ui.DateField
+import com.vaadin.event.FieldEvents.{BlurEvent, BlurListener, FocusEvent, FocusListener}
+import com.vaadin.ui.AbstractComponent
+import com.vaadin.v7.shared.ui.datefield.Resolution
+import com.vaadin.v7.ui.DateField
+import org.vaadin.addons.rinne.events.ListenersSet
 
-trait DateFieldMixin extends AbstractFieldMixin[Date] with BlurNotifierMixin with FocusNotifierMixin {
+trait DateFieldMixin extends AbstractComponent with AbstractFieldMixin[Date]  {
   this: DateField =>
 
   resolution = Resolution.SECOND
+
+  lazy val focusListeners = new ListenersSet[FocusEvent, FocusListener] {
+
+    override protected def addListener(listener: ListenerLambda): Unit = addFocusListener(
+      (focusEvent: FocusEvent) => listener(focusEvent)
+    )
+
+    override protected def removeListener(listener: FocusListener): Unit = removeListener(listener)
+
+    override protected def listeners: java.util.Collection[_] = getListeners(classOf[FocusEvent])
+  }
+
+  lazy val blurListeners = new ListenersSet[BlurEvent, BlurListener] {
+
+    override protected def addListener(listener: ListenerLambda): Unit = addBlurListener(
+      (blurEvent: BlurEvent) => listener(blurEvent)
+    )
+
+    override protected def removeListener(listener: BlurListener): Unit = removeListener(listener)
+
+    override protected def listeners: java.util.Collection[_] = getListeners(classOf[BlurEvent])
+  }
+
 
   def resolution = getResolution
 

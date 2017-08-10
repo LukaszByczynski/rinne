@@ -1,9 +1,8 @@
 package org.vaadin.addons.rinne
 
 import com.vaadin.ui.{Component, CustomComponent}
-import org.vaadin.addons.rinne.mixins.ComponentMixin
 
-class VCustomComponent extends CustomComponent with ComponentMixin {
+class VCustomComponent extends CustomComponent {
 
   def compositionRoot: Option[Component] = Option(getCompositionRoot)
 

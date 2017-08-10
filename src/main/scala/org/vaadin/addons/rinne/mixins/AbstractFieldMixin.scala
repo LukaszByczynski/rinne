@@ -1,14 +1,20 @@
 package org.vaadin.addons.rinne.mixins
 
-import com.vaadin.ui.AbstractField
+import com.vaadin.v7.ui.AbstractField
 
 trait AbstractFieldMixin[T] extends AbstractComponentMixin
 with PropertyValueChangeNotifierMixin with PropertyReadOnlyStatusChangeNotifierMixin {
   this: AbstractField[T] =>
 
-  def validationVisible: Boolean = isValidationVisible
+  def immediate: Boolean = isImmediate
 
-  def validationVisible_=(isValidationVisible: Boolean): Unit = setValidationVisible(isValidationVisible)
+  def immediate_=(immediate: Boolean): Unit = setImmediate(immediate)
+
+  def readOnly: Boolean = isReadOnly
+
+  def readOnly_=(readOnly: Boolean) {
+    setReadOnly(readOnly)
+  }
 
   def conversionError: String = getConversionError
 

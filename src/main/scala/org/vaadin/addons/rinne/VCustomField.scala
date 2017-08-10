@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne
 
-import com.vaadin.ui.CustomField
+import com.vaadin.v7.ui.CustomField
 import org.vaadin.addons.rinne.mixins.AbstractFieldMixin
 
 import scala.reflect._

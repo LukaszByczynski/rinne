@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne
 
-import com.vaadin.ui.ProgressBar
+import com.vaadin.v7.ui.ProgressBar
 import org.vaadin.addons.rinne.mixins.{PropertyValueChangeNotifierMixin, PropertyViewerMixin, AbstractFieldMixin}
 
 class VProgressBar extends ProgressBar with AbstractFieldMixin[java.lang.Float]

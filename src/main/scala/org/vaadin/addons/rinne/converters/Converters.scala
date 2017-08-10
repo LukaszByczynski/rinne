@@ -2,7 +2,7 @@ package org.vaadin.addons.rinne.converters
 
 import java.util.Locale
 
-import com.vaadin.data.util.converter.Converter
+import com.vaadin.v7.data.util.converter.Converter
 
 object Converters {
 

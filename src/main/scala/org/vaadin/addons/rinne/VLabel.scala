@@ -1,8 +1,8 @@
 package org.vaadin.addons.rinne
 
-import com.vaadin.data.util.converter.Converter
-import com.vaadin.shared.ui.label.ContentMode
-import com.vaadin.ui.Label
+import com.vaadin.v7.data.util.converter.Converter
+import com.vaadin.v7.shared.ui.label.ContentMode
+import com.vaadin.v7.ui.Label
 import org.vaadin.addons.rinne.mixins.{AbstractComponentMixin, PropertyMixin, PropertyValueChangeNotifierMixin, PropertyViewerMixin}
 
 class VLabel extends Label with AbstractComponentMixin

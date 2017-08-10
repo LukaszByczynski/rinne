@@ -1,6 +1,6 @@
 package org.vaadin.addons.rinne.mixins
 
-import com.vaadin.data.Container
+import com.vaadin.v7.data.Container
 
 trait ContainerViewerMixin {
   this: Container.Viewer =>

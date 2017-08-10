@@ -12,9 +12,7 @@ trait LayoutClickNotifierMixin {
   lazy val layoutClickListeners = new ListenersSet[LayoutClickEvent, LayoutClickListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addLayoutClickListener(
-      new Listener(listener) with LayoutClickListener {
-        override def layoutClick(layoutClickEvent: LayoutClickEvent): Unit = listener(layoutClickEvent)
-      }
+      (layoutClickEvent: LayoutClickEvent) => listener(layoutClickEvent)
     )
 
     override protected def removeListener(listener: LayoutClickListener): Unit = removeLayoutClickListener(listener)

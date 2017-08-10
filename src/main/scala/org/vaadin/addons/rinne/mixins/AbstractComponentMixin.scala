@@ -17,9 +17,7 @@ trait AbstractComponentMixin extends ComponentMixin {
   lazy val attachListeners = new ListenersSet[AttachEvent, AttachListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addAttachListener(
-      new Listener(listener) with AttachListener {
-        override def attach(attachEvent: AttachEvent): Unit = listener.apply(attachEvent)
-      }
+      (attachEvent: AttachEvent) => listener.apply(attachEvent)
     )
 
     override protected def removeListener(listener: AttachListener): Unit = removeAttachListener(listener)
@@ -30,9 +28,7 @@ trait AbstractComponentMixin extends ComponentMixin {
   lazy val detachListeners = new ListenersSet[DetachEvent, DetachListener] {
 
     override protected def addListener(listener: ListenerLambda): Unit = addDetachListener(
-      new Listener(listener) with DetachListener {
-        override def detach(detachEvent: DetachEvent): Unit = listener.apply(detachEvent)
-      }
+      (detachEvent: DetachEvent) => listener.apply(detachEvent)
     )
 
     override protected def removeListener(listener: DetachListener): Unit = removeDetachListener(listener)
@@ -53,11 +49,7 @@ trait AbstractComponentMixin extends ComponentMixin {
   def description_=(description: Option[String]): Unit = setDescription(description.orNull)
 
   def description_=(description: String): Unit = setDescription(description)
-
-  def immediate: Boolean = isImmediate
-
-  def immediate_=(immediate: Boolean): Unit = setImmediate(immediate)
-
+  
   def data: Any = getData
 
   def data_=(data: Any): Unit = setData(data)
@@ -97,9 +89,10 @@ trait AbstractComponentMixin extends ComponentMixin {
 
     override def iterator: Iterator[ListenerLambda] = {
       import scala.collection.JavaConverters._
-      _listenersToKeyShortcutActionMap.keySet().asScala.map { e => new ListenerLambda {
-        override def apply(v1: Any): Unit = e.action(v1, v1)
-      }
+      _listenersToKeyShortcutActionMap.keySet().asScala.map { e =>
+        new ListenerLambda {
+          override def apply(v1: Any): Unit = e.action(v1, v1)
+        }
       }.toIterator
     }
 

@@ -1,11 +1,15 @@
 package org.vaadin.addons.rinne.mixins
 
-import com.vaadin.ui.AbstractSelect
-import com.vaadin.ui.AbstractSelect.ItemCaptionMode
+import java.util
+
+import com.vaadin.event.FieldEvents._
+import com.vaadin.v7.ui.AbstractSelect
+import com.vaadin.v7.ui.AbstractSelect.ItemCaptionMode
+import org.vaadin.addons.rinne.events.ListenersSet
 
 trait AbstractSelectMixin extends AbstractFieldMixin[AnyRef] with ComponentMixin
-with ContainerMixin with ContainerViewerMixin with ContainerItemSetChangeNotifierMixin
-with ContainerPropertySetChangeNotifierMixin {
+  with ContainerMixin with ContainerViewerMixin with ContainerItemSetChangeNotifierMixin
+  with ContainerPropertySetChangeNotifierMixin {
   this: AbstractSelect =>
 
   def newItemsAllowed: Boolean = isNewItemsAllowed
