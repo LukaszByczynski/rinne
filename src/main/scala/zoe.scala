@@ -1,6 +1,6 @@
 package ios
 
-import com.vaadin.ui.RichTextArea
+import com.vaadin.ui.{HorizontalLayout, RichTextArea, TextField}
 
 package zoe {
 
@@ -18,16 +18,18 @@ package zoe {
 
 object Test {
 
-  import org.vaadin.addons.rinne.v8._
+  import org.vaadin.addons.rinne._
 
   import scala.language.implicitConversions
 
   //val a = new TextField()
   //a.value2
   val b = new RichTextArea()
-  b.width = 200.px
+  b.width = 200.222.px
 
-
+  val c = new HorizontalLayout()
+  c.components += new TextField
+  
 
 
 }

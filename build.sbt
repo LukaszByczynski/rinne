@@ -12,7 +12,7 @@ name := "rinne"
 version := "0.8.3"
 
 scalaVersion in ThisBuild := "2.12.3"
-scalacOptions ++= Seq("-unchecked", "-feature", "-Yrangepos")
+scalacOptions ++= Seq("-unchecked", "-feature", "-deprecation", "-Yrangepos")
 parallelExecution := false
 
 publishTo := Some(bizbeamResolver)
@@ -22,7 +22,6 @@ libraryDependencies ++= {
   val vaadinVersion = "8.1.0"
 
   Seq(
-    "org.scala-lang" % "scala-reflect" % scalaVersion.value,
     "com.vaadin" % "vaadin-server" % vaadinVersion % "provided",
     "com.vaadin" % "vaadin-compatibility-server" % vaadinVersion % "provided",
     "javax.servlet" % "servlet-api" % "2.5" % "provided",
