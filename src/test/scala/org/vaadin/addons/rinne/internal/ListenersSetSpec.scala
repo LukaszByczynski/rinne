@@ -1,5 +1,6 @@
-package org.vaadin.addons.rinne.v8.internal
+package org.vaadin.addons.rinne.internal
 
+import com.vaadin.shared.Registration
 import com.vaadin.ui.Button
 
 class ListenersSetSpec extends org.specs2.mutable.Specification {
@@ -7,9 +8,11 @@ class ListenersSetSpec extends org.specs2.mutable.Specification {
   "The ListenerSet" should {
 
     val listenersSet = new ListenersSet[Button.ClickEvent, Button.ClickListener] {
-      override protected def addListener(listener: Button.ClickListener) = () => {}
+      override protected def addListener(listener: Button.ClickListener): Registration = () => {}
 
-      override protected def createListener(action: => Unit) = (_ => action)
+      override protected def createListener(action: => Unit): Button.ClickListener = {
+        _ => action
+      }
     }
 
     val listener: Button.ClickListener = (_: Button.ClickEvent) => ()

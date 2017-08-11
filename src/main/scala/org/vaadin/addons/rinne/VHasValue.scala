@@ -2,7 +2,7 @@ package org.vaadin.addons.rinne
 
 import com.vaadin.data.{HasValue, Validator}
 import com.vaadin.shared.Registration
-import org.vaadin.addons.rinne.v8.internal.ListenersSet
+import org.vaadin.addons.rinne.internal.ListenersSet
 
 class VHasValue[T](hasValue: HasValue[T]) {
 

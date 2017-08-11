@@ -1,4 +1,4 @@
-package org.vaadin.addons.rinne.v8.internal
+package org.vaadin.addons.rinne.internal
 
 import com.vaadin.shared.Registration
 
